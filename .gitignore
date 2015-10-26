@@ -1,0 +1,4 @@
+images_in/*.PGM
+images_in/*.PPM
+images_out/*.PGM
+images_out/*.PPM

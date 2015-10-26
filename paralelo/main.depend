@@ -1,0 +1,638 @@
+# depslib dependency file v1.0
+1439346506 source:c:\users\pnc7janelasnote\desktop\8� per�odo\[ssc0143] programa��o concorrente\trabalhos\t1\trabalho1\matentrada.c
+	<stdio.h>
+	<stdlib.h>
+	"matEntrada.h"
+
+1441292325 a.h"
+
+1439344345 c:\users\pnc7janelasnote\desktop\8� per�odo\[ssc0143] programa��o concorrente\trabalhos\t1\trabalho1\matentrada.h
+
+1439346729 source:c:\users\pnc7janelasnote\desktop\8� per�odo\[ssc0143] programa��o concorrente\trabalhos\t1\trabalho1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matEntrada.h"
+	<string.h>
+
+1443824221 
+
+1440550771 source:c:\users\pnc7janelasnote\documents\github\t1-prog-conc-bcc-a\trabalho1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"matEntrada.h"
+	"interfaces.h"
+
+1441368167 s.h"
+
+1440548880 c:\users\pnc7janelasnote\documents\github\t1-prog-conc-bcc-a\trabalho1\matentrada.h
+
+1440550267 source:c:\users\pnc7janelasnote\documents\github\t1-prog-conc-bcc-a\trabalho1\matentrada.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matEntrada.h"
+
+1440550966 source:c:\users\pnc7janelasnote\documents\github\t1-prog-conc-bcc-a\trabalho1\interfaces.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"interfaces.h"
+
+1440548087 c:\users\pnc7janelasnote\documents\github\t1-prog-conc-bcc-a\trabalho1\interfaces.h
+
+1441223233 source:c:\users\pnc\documents\github\t1-prog-conc-bcc-a\trabalho1\interfaces.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"interfaces.h"
+
+1441220209 c:\users\pnc\documents\github\t1-prog-conc-bcc-a\trabalho1\interfaces.h
+
+1441222694 source:c:\users\pnc\documents\github\t1-prog-conc-bcc-a\trabalho1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"matEntrada.h"
+	"interfaces.h"
+
+1441222648 c:\users\pnc\documents\github\t1-prog-conc-bcc-a\trabalho1\matentrada.h
+
+1441223052 source:c:\users\pnc\documents\github\t1-prog-conc-bcc-a\trabalho1\matentrada.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matEntrada.h"
+
+1441288874 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/interfaces.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"interfaces.h"
+
+1441304054 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/interfaces.h
+
+1441308356 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/main.c
+	<stdio.h>
+	<stdlib.h>
+	"interfaces.c"
+	"matEntrada.h"
+	"resultados.h"
+	"timer.h"
+
+1441297222 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/matEntrada.h
+
+1441309370 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/matEntrada.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matEntrada.h"
+	<pthread.h>
+
+1441290340 >
+
+1441292325 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/resultados.h
+	"timer.h"
+	"matEntrada.h"
+
+1441290340 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1441290280 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1441292363 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/resultados.c
+	<stdio.h>
+	<stdlib.h>
+	<inttypes.h>
+	<math.h>
+	"resultados.h"
+
+1441302953 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/interfaces.h
+
+1441304469 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/t1-prog-conc-bcc-a/Trabalho1/interfaces.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"interfaces.h"
+
+1443906687 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/funcao.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<pthread.h>
+	<dirent.h>
+	<string.h>
+	"funcao.h"
+	"timer.h"
+	"menu.h"
+	"main.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<dirent.h>
+	<string.h>
+	<unistd.h>
+	"main.h"
+	"funcao.h"
+
+1443906677 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/funcao.h
+	"timer.h"
+	"menu.h"
+	"matriz.h"
+
+1443904160 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"main.h"
+	"menu.h"
+	"funcao.h"
+	"timer.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"main.h"
+	"menu.h"
+	"funcao.h"
+	"sequencial.h"
+	"p_omp.h"
+	"p_pthread.h"
+
+1443822616 .h"
+
+1443902949 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/menu.h
+
+1441365674 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/resultados.h
+	"timer.h"
+	"funcao.h"
+
+1441290340 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1443906463 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"funcao.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"funcao.h"
+	"main.h"
+
+1441368167 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/resultados.c
+	<stdio.h>
+	<stdlib.h>
+	<inttypes.h>
+	<math.h>
+	"resultados.h"
+
+1441498891 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1443820814 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/sequencial.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcao.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcao.h"
+	"sequencial.h"
+
+1443820814 l.h"
+
+1443827474 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/main.h
+
+1441502256 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/paralelo.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"paralelo.h"
+	"funcao.h"
+	"menu.h"
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"funcao.h"
+	"paralelo.h"
+
+1441502256 h"
+
+1441501628 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/paralelo.h
+
+1443906687 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\funcao.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<dirent.h>
+	<string.h>
+	<unistd.h>
+	"main.h"
+	"funcao.h"
+
+1443906677 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\funcao.h
+	"timer.h"
+	"menu.h"
+	"matriz.h"
+
+1441290340 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1443902949 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\menu.h
+
+1443827474 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\main.h
+
+1441489907 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"main.h"
+	"menu.h"
+	"funcao.h"
+	"timer.h"
+
+1441458378 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"funcao.h"
+
+1441489946 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\paralelo.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	"paralelo.h"
+	"funcao.h"
+	"menu.h"
+
+1441471978 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\paralelo.h
+
+1441469447 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\sequencial.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcao.h"
+
+1441498891 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1441394741 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/sequencial.h
+
+1443822616 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_pthread.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"funcao.h"
+	"p_pthread.h"
+
+1443821118 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_pthread.h
+
+1443824221 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_omp.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<omp.h>
+	"funcao.h"
+	"p_omp.h"
+
+1443821123 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_omp.h
+
+1443883562 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/matriz.h
+	"menu.h"
+
+1443904285 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/matriz.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matriz.h"
+	"main.h"
+
+1443883562 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\matriz.h
+	"menu.h"
+
+1443904285 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\matriz.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matriz.h"
+	"main.h"
+
+1443824221 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\p_omp.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<omp.h>
+	"funcao.h"
+	"p_omp.h"
+
+1443821123 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\p_omp.h
+
+1443822616 source:d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\p_pthread.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"funcao.h"
+	"p_pthread.h"
+
+1443821118 d:\faculdades\doutorado - usp\disciplinas\ssc5795 - programa��o concorrente\trabalhos\trabalho 1\naylor\src\p_pthread.h
+
+1443906687 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/funcao.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<dirent.h>
+	<string.h>
+	<unistd.h>
+	"main.h"
+	"funcao.h"
+
+1443827474 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/main.h
+
+1443906677 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/funcao.h
+	"timer.h"
+	"menu.h"
+	"matriz.h"
+
+1441290340 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1443902949 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/menu.h
+
+1443883562 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/matriz.h
+	"menu.h"
+
+1443904285 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/matriz.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matriz.h"
+	"main.h"
+
+1443824221 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_omp.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<omp.h>
+	"funcao.h"
+	"p_omp.h"
+
+1443821123 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_omp.h
+
+1443822616 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_pthread.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"funcao.h"
+	"p_pthread.h"
+
+1443821118 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/p_pthread.h
+
+1441498891 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 1/naylor/src/timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1444408269 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/funcao.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<dirent.h>
+	<string.h>
+	<unistd.h>
+	"main.h"
+	"funcao.h"
+
+1444409071 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/main.h
+
+1444408236 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/funcao.h
+	"timer.h"
+	"menu.h"
+	"imagem.h"
+
+1441290340 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1444578607 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/menu.h
+
+1443883562 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/matriz.h
+	"menu.h"
+
+1444755387 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"main.h"
+	"menu.h"
+	"funcao.h"
+	"sequencial.h"
+	"paralelo.h"
+	"imagem.h"
+
+1444944740 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/sequencial.h
+
+1443821123 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/p_omp.h
+
+1443821118 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/p_pthread.h
+
+1443904285 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/matriz.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"matriz.h"
+	"main.h"
+
+1444782655 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"funcao.h"
+	"main.h"
+
+1443824221 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/p_omp.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<omp.h>
+	"funcao.h"
+	"p_omp.h"
+
+1443822616 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/p_pthread.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	<pthread.h>
+	"funcao.h"
+	"p_pthread.h"
+
+1444943718 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/sequencial.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcao.h"
+	"sequencial.h"
+
+1441498891 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1444944808 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/imagem.h
+	"menu.h"
+
+1444946131 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/imagem.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"imagem.h"
+	"main.h"
+	"menu.h"
+	<unistd.h>
+	"funcao.h"
+
+1444944724 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/paralelo.h
+
+1444944706 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/src/paralelo.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funcao.h"
+	"paralelo.h"
+	<omp.h>
+
+1445721602 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/funcao.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<dirent.h>
+	<string.h>
+	<unistd.h>
+	"funcao.h"
+	"imagem.h"
+
+1445717617 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/funcao.h
+	"timer.h"
+	"imagem.h"
+
+1445027729 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/timer.h
+	<time.h>
+	<sys/time.h>
+	<stdbool.h>
+
+1445654504 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/timer.c
+	<stdlib.h>
+	<stdio.h>
+	<sys/time.h>
+	<time.h>
+	<stdbool.h>
+	"timer.h"
+
+1445821199 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/imagem.h
+	"funcao.h"
+
+1445715672 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/imagem.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"imagem.h"
+	<unistd.h>
+	"funcao.h"
+
+1445436185 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"../common/timer.h"
+	"../common/imagem.h"
+	"paralelo.h"
+	"main.h"
+	"mpi/mpi.h"
+	<omp.h>
+
+1445399321 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/paralelo.h
+	"menu.h"
+
+1445390938 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/main.h
+
+1445484780 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/menu.h
+	"../common/funcao.h"
+
+1445435599 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"main.h"
+	"paralelo.h"
+
+1445457824 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/paralelo/paralelo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../common/imagem.h"
+	"paralelo.h"
+	"main.h"
+	<omp.h>
+
