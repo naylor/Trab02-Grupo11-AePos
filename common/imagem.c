@@ -218,7 +218,7 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     int offset;
 
     // SE FOR LINHA INICIAL 0 E A FINAL 0, DEFINE O OFFSET COMO 0
-    if (thread[numThread].li == 0 && thread[numThread].lf == imageParams->linha)
+    if (thread[numThread].li == 0 && thread[numThread].lf == imageParams->linha-1)
         offset = 0;
 
     // SE FOR A PRIMEIRA LINHA E NAO FOR A ULTIMA
@@ -256,10 +256,10 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     fseek(fp, imageParams->posIniFileIn+offset, SEEK_SET);
 
     if (ct->debug >= 2)
-        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d] %d\n\n", numNode, numThread,
+        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
                imageParams->posIniFileIn, offset,
                thread[numThread].li,
-               thread[numThread].lf, imageParams->linha);
+               thread[numThread].lf);
 
     // LE O ARQUIVO
     int ret;
