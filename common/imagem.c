@@ -256,10 +256,10 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     fseek(fp, imageParams->posIniFileIn+offset, SEEK_SET);
 
     if (ct->debug >= 2)
-        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d] %d\n\n", numNode, numThread,
                imageParams->posIniFileIn, offset,
                thread[numThread].li,
-               thread[numThread].lf);
+               thread[numThread].lf, imageParams->linha);
 
     // LE O ARQUIVO
     int ret;
