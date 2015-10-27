@@ -256,8 +256,8 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     fseek(fp, imageParams->posIniFileIn+offset, SEEK_SET);
 
     if (ct->debug >= 2)
-        printf("Read Thread[%d][%d] Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileIn+offset,
+        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileIn, offset,
                thread[numThread].li,
                thread[numThread].lf);
 
@@ -269,8 +269,8 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
         ret = fread_unlocked(thread[numThread].pgmIn, imageParams->coluna, linhas, fp);
 
     if (ret == 0) {
-        printf("Error Read Thread[%d][%d] Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileIn+offset,
+        printf("Error Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileIn, offset,
                thread[numThread].li,
                thread[numThread].lf);
         ct->erro = -101;
@@ -319,8 +319,8 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     fseek(fp, imageParams->posIniFileOut+offset, SEEK_SET);
 
     if (ct->debug >= 2)
-        printf("Write Thread[%d][%d] Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileOut+offset,
+        printf("Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileOut, offset,
                thread[numThread].li,
                thread[numThread].lf);
 
@@ -332,8 +332,8 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
         ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
     if (ret == 0) {
-        printf("Error Write Thread[%d][%d] Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileOut+offset,
+        printf("Error Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileOut, offset,
                thread[numThread].li,
                thread[numThread].lf);
         ct->erro = -101;

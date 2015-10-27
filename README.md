@@ -1,4 +1,4 @@
-Usando MPI e OpenMP para aplicação de Smooth em Imagens PPM
+﻿Usando MPI e OpenMP para aplicação de Smooth em Imagens PPM
 ===========================================================
 
 ### Dependências
@@ -45,7 +45,7 @@ O rank 0 comanda a comunicação. É responsável por enviar o trabalho para os 
   * [NODES]: substituir pelo arquivo contendo os nodes: nodes.
   * [NUMERO THREADS]: número de threads para cada node local, se omitido, será com base no número de núcleos.
   * [CARGA TRABALHO]: número máximo de linhas, que o Rank0 alocará para cada processo, se omitido, será uma divisão igualitária.
-  * [CARGA ALEATÓRIA]: se ativado, as cargas enviadas para os nodes serão aleatorias.
+  * [CARGA ALEATÓRIA]: se ativado, as cargas enviadas para os nodes serão aleatórias.
   * [LEITURA INDIVIDUAL]: faz com que cada processo tenha acesso exclusivo a imagem no momento da leitura.
   * [NIVEL DEBUG]: permite monitorar os eventos do sistema, permitido 1: nível do node e 2: nível da imagem.
 

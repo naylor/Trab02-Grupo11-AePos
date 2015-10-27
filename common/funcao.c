@@ -92,7 +92,7 @@ void writeFile(PPMImageParams* imageParams, timer* tempo, initialParams* ct) {
 
 	//filename
 	char filename[200];
-    sprintf((char*) &filename, "%s%c_%ix%i.txt", ct->DIRRES, ct->typeAlg, imageParams->linha, imageParams->coluna);
+    sprintf((char*) &filename, "%s%c_%s.txt", ct->DIRRES, ct->typeAlg, ct->filePath);
 
    	//write to file
 	FILE* f = fopen(filename, "a");

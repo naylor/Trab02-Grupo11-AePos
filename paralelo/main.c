@@ -155,7 +155,6 @@ int main (int argc, char **argv){
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
                                         MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
-                                        printf(".");
                                         MPI_Recv(&completedIndexes[i], inteiro, MPI_INT, i, 12, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
@@ -254,7 +253,6 @@ int main (int argc, char **argv){
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
                 thread = paraleloNodeReadAndSmooth(ct, imageParams, node, rank);
-                printf("|");
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
