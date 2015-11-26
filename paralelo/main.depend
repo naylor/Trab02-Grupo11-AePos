@@ -563,7 +563,7 @@
 	"paralelo.h"
 	<omp.h>
 
-1445721602 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/funcao.c
+1445826726 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/funcao.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -582,7 +582,7 @@
 	<sys/time.h>
 	<stdbool.h>
 
-1445654504 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/timer.c
+1445787680 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/timer.c
 	<stdlib.h>
 	<stdio.h>
 	<sys/time.h>
@@ -593,10 +593,11 @@
 1445821199 /media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/imagem.h
 	"funcao.h"
 
-1445715672 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/imagem.c
+1445967921 source:/media/naylor/DADOS/Faculdades/Doutorado - USP/Disciplinas/SSC5795 - Programação Concorrente/Trabalhos/Trabalho 2/naylor/common/imagem.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
+	<string.h>
 	"imagem.h"
 	<unistd.h>
 	"funcao.h"

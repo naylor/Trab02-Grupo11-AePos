@@ -327,7 +327,7 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     // GRAVA O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna, linhas, fp);
+        ret = fwrite_unlocked(thread[numThread].ppmIn, 3*imageParams->coluna, linhas, fp);
     else
         ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
