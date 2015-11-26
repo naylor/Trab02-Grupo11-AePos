@@ -18,7 +18,7 @@ void sequencial(PPMImageParams* imageParams, initialParams* ct) {
     //COMO ESSE E O SEQUENCIAL
     //SEM THREADS E SEM NODES
     ct->numThreads = 1;
-    int numNodes = 1;
+    int numNodes = 0;
 
     //INFO DO PROCESSO ESCOLHIDO:
     printf("\n\nFile PPM %s\ncoluna: %d\nlinha: %d\nTipo: %s\n\n", imageParams->fileIn,
