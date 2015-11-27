@@ -184,9 +184,9 @@ PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PP
             linhas += 2;
 
         if (strcmp(imageParams->tipo, "P6")==0)
-            thread[t].ppmIn = malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
+            thread[t].ppmIn = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
         else
-            thread[t].pgmIn = malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
+            thread[t].pgmIn = (PGMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
 
         if (ct->debug >= 2)
             printf("Division Thread(linha)[%d][%d], li:%d, lf:%d\n", numNode, t,
@@ -264,7 +264,7 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     // LE O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fread_unlocked(thread[numThread].ppmIn, 2*imageParams->coluna, linhas, fp);
+        ret = fread_unlocked(thread[numThread].ppmIn, 3*imageParams->coluna, linhas, fp);
     else
         ret = fread_unlocked(thread[numThread].pgmIn, imageParams->coluna, linhas, fp);
 
@@ -380,42 +380,49 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
     // FORAM LIDAS, COMECAR ENTAO A APLICACAO
     // DO SMOOTH APOS ELAS
     if (thread[numThread].li != 0)
-        inicio = 2*imageParams->coluna;
-
-
+        inicio = 2;
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=inicio;l<=(linhas*imageParams->coluna);l++) {
+    for(l=inicio;l<=(linhas-1)+inicio;l++) {
+        for(c=0;c<=imageParams->coluna-1;c++) {
 
             int sumr=0;
             int sumb=0;
             int sumg=0;
 
+            // SELECIONANDO OS PIXELS VIZINHOS
+            // PARA CADA PIXEL NA MATRIZ
+            for(l2=l-2;l2<=l+2;l2++){
+                for(c2=c-2;c2<=c+2;c2++){
 
-
-
+                    // SOMA APENAS SE NAO FOR PIXEL DE BORDA
+                    // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
+                    if (l2 >= 0 && c2 >= 0) {
+                        p = (l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
-                            sumb = thread[numThread].ppmIn[1].blue;
-                            sumg = thread[numThread].ppmIn[1].green;
-                            sumr = thread[numThread].ppmIn[1].red;
+                            sumb += thread[numThread].ppmIn[p].blue;
+                            sumg += thread[numThread].ppmIn[p].green;
+                            sumr += thread[numThread].ppmIn[p].red;
                         }
 
-
-
-
-            //printf("K[%d] - SUM[%d] \n", k, sumr);
-
+                        if (strcmp(imageParams->tipo, "P5")==0)
+                            sumg += thread[numThread].pgmIn[p].gray;
+                    }
+                }
+            }
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
             if (strcmp(imageParams->tipo, "P6")==0) {
-                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[l].red;
-                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[l].green;
-                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[l].blue;
+                thread[numThread].ppmOut[k].red = sumr/25;
+                thread[numThread].ppmOut[k].green = sumg/25;
+                thread[numThread].ppmOut[k].blue = sumb/25;
             }
-
+            if (strcmp(imageParams->tipo, "P5")==0)
+                thread[numThread].pgmOut[k].gray = sumg/25;
 
             k++;
+        }
     }
     if (ct->debug >= 2)
         printf("Done Smooth[%d][%d] - K[%d] \n", numNode, numThread, k);
