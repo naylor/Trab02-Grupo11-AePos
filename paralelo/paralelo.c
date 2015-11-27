@@ -50,41 +50,45 @@ PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParam
     return imageParams;
 }
 
-PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode) {
+PPMThreadOut* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode) {
 
-    PPMThread* thread;
+    PPMThreadIn* threadIn;
     // FAZ A DIVISAO DAS LINHAS RECEBIDAS
     // PARA AS THREADS
-    thread = getDivisionThreads(ct, imageParams, node, numNode);
+    threadIn = getDivisionThreads(ct, imageParams, node, numNode);
     int t;
+
+    // BLOCO QUE RECEBERA A IMAGEM
+    // COM O FILTRO
+    PPMThreadOut* threadOut = (PPMThreadOut *)malloc(sizeof(PPMThreadOut) * ct->numThreads);
 
     // ESSA PARTE FOI PARALELIZADA
     // CADA THREAD APLICA O SMOOTH
-    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, thread, numNode)
+    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, threadIn, numNode)
     {
         #pragma omp for
         for(t=0; t<ct->numThreads; t++) {
             // LEITURA DAS LINHAS DEFINIDAS
             // PARA CADA THREAD
-            getImageThreads(ct, imageParams, thread,  t, numNode);
+            getImageThreads(ct, imageParams, threadIn,  t, numNode);
 
-            applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
+            applySmooth(ct, imageParams, threadIn, threadOut, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
         }
         #pragma omp barrier
     }
-    return thread;
+    return threadOut;
 }
 
 // ESSA FUNCAO ESCREVE NO ARQUIVO DE SAIDA
 // A IMAGEM COM O FILTRO APLICADO
-int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numNode) {
+int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThreadOut* threadOut, int numNode) {
 
     int t;
 
     // PARA CADA THREAD, ESCREVE A IMAGEM
     // NAO DA PARA PARELIZAR ESCRITA EM DISCO
     for(t=0; t<ct->numThreads; t++)
-        writePPMPixels(ct, imageParams, thread, t, numNode);
+        writePPMPixels(ct, imageParams, threadOut, t, numNode);
 
     return 1;
 }
