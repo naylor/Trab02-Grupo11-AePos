@@ -398,7 +398,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             // PARA CADA PIXEL NA MATRIZ
             for(l2=-2;l2<=2;l2++){
                 for(c2=-2;c2<=2;c2++){
-            printf("SUM[%d] - K[%d] \n", k, sumr);
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
