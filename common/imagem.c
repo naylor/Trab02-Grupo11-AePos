@@ -414,7 +414,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                     }
                 }
             }
-            printf("K[%d] - SUM[%d] \n", k, sumr);
+            //printf("K[%d] - SUM[%d] \n", k, sumr);
 
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
