@@ -327,7 +327,7 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     // GRAVA O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna-1, linhas, fp);
+        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna, linhas, fp);
     else
         ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
@@ -399,7 +399,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                             sumb = thread[numThread].ppmIn[1].blue;
                             sumg = thread[numThread].ppmIn[1].green;
                             sumr = thread[numThread].ppmIn[1].red;
-                            sumr = thread[numThread].ppmIn[1].alpha;
                         }
 
 
@@ -413,7 +412,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[l].red;
                 thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[l].green;
                 thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[l].blue;
-                thread[numThread].ppmOut[k].alpha = thread[numThread].ppmIn[l].alpha;
             }
 
 
