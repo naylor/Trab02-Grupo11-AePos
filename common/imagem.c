@@ -355,6 +355,8 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                numNode, numThread, imageParams->coluna, linhas,
                thread[numThread].li, thread[numThread].lf);
 
+    int k=0;
+
     // ALOCA MEMORIA PARA A IMAGEM DE SAIDA
     if (strcmp(imageParams->tipo, "P6")==0)
         thread[numThread].ppmOut = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
@@ -378,9 +380,8 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
     // FORAM LIDAS, COMECAR ENTAO A APLICACAO
     // DO SMOOTH APOS ELAS
     if (thread[numThread].li != 0)
-        inicio = 2;
+        inicio = 2*imageParams->coluna;
 
-    int k=0;
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
     for(l=inicio;l<=(linhas*imageParams->coluna)+inicio;l++) {
@@ -391,13 +392,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // SELECIONANDO OS PIXELS VIZINHOS
             // PARA CADA PIXEL NA MATRIZ
-            for(l2=-2;l2<=2;l2++){
+            for(l2=l-2;l2<=l+2;l2++){
                 for(c2=-2;c2<=2;c2++){
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
-                    if ((l-l2*imageParams->coluna)+c2 >= 0) {
-                        p = (l-l2*imageParams->coluna)+c2;
+                    if (l2 >= 0) {
+                        p = (l*imageParams->coluna)+l2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
                             sumb += thread[numThread].ppmIn[p].blue;
                             sumg += thread[numThread].ppmIn[p].green;
@@ -418,8 +419,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             }
             if (strcmp(imageParams->tipo, "P5")==0)
                 thread[numThread].pgmOut[k].gray = sumg/25;
-        k++;
+
+            k++;
     }
     if (ct->debug >= 2)
-        printf("Done Smooth[%d][%d] \n", numNode, numThread);
+        printf("Done Smooth[%d][%d] - K[%d] \n", numNode, numThread, k);
 }
