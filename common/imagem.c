@@ -404,6 +404,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                             sumb = thread[numThread].ppmIn[1].blue;
                             sumg = thread[numThread].ppmIn[1].green;
                             sumr = thread[numThread].ppmIn[1].red;
+                            sumr = thread[numThread].ppmIn[1].alpha;
                         }
 
 
@@ -418,6 +419,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[k].red;;
                 thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[k].green;
                 thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[k].blue;
+                thread[numThread].ppmOut[k].alpha = thread[numThread].ppmIn[k].alpha;
             }
 
 
