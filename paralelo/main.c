@@ -72,6 +72,7 @@ int main (int argc, char **argv){
     MPI_Bcast ( &imageParams->linha, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &imageParams->posIniFileIn, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &imageParams->posIniFileOut, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
+    MPI_Bcast ( &imageParams->tipo, 2, MPI_CHAR, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &imageParams->fileIn, 200, MPI_CHAR, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &imageParams->fileOut, 200, MPI_CHAR, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &ct->numThreads, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
