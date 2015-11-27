@@ -217,40 +217,6 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     // DEFININDO A POSICAO DE LEITURA NO ARQUIVO
     int offset;
 
-    // SE FOR LINHA INICIAL 0 E A FINAL 0, DEFINE O OFFSET COMO 0
-    if (thread[numThread].li == 0 && thread[numThread].lf == imageParams->linha-1)
-        offset = 0;
-
-    // SE FOR A PRIMEIRA LINHA E NAO FOR A ULTIMA
-    // LE A PARTIR DO OFFSET 0 + O SEU BLOCO + 2 LINHAS POSTERIORES
-    // POIS A THREAD PRECISARA DE 2 LINHAS POSTERIORES, FORA O SEU BLOCO,
-    // PARA O SMOOTH
-    if (thread[numThread].li == 0 && thread[numThread].lf != 0 && thread[numThread].lf != imageParams->linha-1) {
-        offset = 0;
-        linhas += 2;
-    }
-
-    // SE A THREAD PEGAR UM BLOCO DO MEIO DA IMAGEM
-    // LE AS DUAS ANTERIORES, AS DUAS POSTERIORES + O SEU BLOCO
-    if (thread[numThread].li != 0 && thread[numThread].lf != imageParams->linha-1) {
-        if (strcmp(imageParams->tipo, "P6")==0)
-            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PPMPixel);
-        else
-            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PGMPixel);
-
-        linhas += 4;
-    }
-
-    // FINAL DE ARQUIVO, LE SOMENTE AS DUAS ANTERIORES + SEU BLOCO
-    if (thread[numThread].li != 0 && thread[numThread].lf == imageParams->linha-1) {
-        if (strcmp(imageParams->tipo, "P6")==0)
-            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PPMPixel);
-        else
-            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PGMPixel);
-
-        linhas += 2;
-    }
-
     // SETA O PONTEIRO NO ARQUIVO + O CABECALHO
     // PARA A LEITURA DE CADA THREAD
     fseek(fp, imageParams->posIniFileIn+offset, SEEK_SET);
