@@ -384,8 +384,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=0;l<=(imageParams->linha-1);l++) {
-        for(c=0;c<=imageParams->coluna-1;c++) {
+    for(l=0;l<=(imageParams->coluna*linhas);l++) {
 
             int sumr=0;
             int sumb=0;
@@ -401,7 +400,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[k].blue;
 
             k++;
-        }
     }
     if (ct->debug >= 2)
         printf("Done Smooth[%d][%d] - K[%d] \n", numNode, numThread, k);
