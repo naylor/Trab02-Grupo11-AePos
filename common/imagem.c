@@ -415,9 +415,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
             if (strcmp(imageParams->tipo, "P6")==0) {
-                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[l].red;;
-                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[l].green;
-                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[l].blue;
+                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[k].red;;
+                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[k].green;
+                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[k].blue;
             }
 
 
