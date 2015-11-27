@@ -401,6 +401,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                     if (l2 >= 0 && c2 >= 0) {
                         p = (l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
+                            printf("RED- [%d] \n", thread[numThread].ppmIn[p].red);
                             sumb += thread[numThread].ppmIn[p].blue;
                             sumg += thread[numThread].ppmIn[p].green;
                             sumr += thread[numThread].ppmIn[p].red;
