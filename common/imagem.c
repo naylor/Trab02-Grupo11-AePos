@@ -371,14 +371,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 }
             }
 
-            // GUARDA O RESULTADO NA IMAGEM DE SAIDA
-            if (strcmp(imageParams->tipo, "P6")==0) {
-                thread[numThread].ppmOut[k].red = sumr/25;
-                thread[numThread].ppmOut[k].green = sumg/25;
-                thread[numThread].ppmOut[k].blue = sumb/25;
-            }
-            if (strcmp(imageParams->tipo, "P5")==0)
-                thread[numThread].pgmOut[k].gray = sumg/25;
+
 
             k++;
         }
