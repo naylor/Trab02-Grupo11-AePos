@@ -44,20 +44,18 @@ void sequencial(PPMImageParams* imageParams, initialParams* ct) {
     int t,n;
     for(n=0; n<endOfNodes; n++) {
         // ALOCA MEMORIA PARA A THREAD
-        PPMThreadIn* threadIn = getDivisionThreads(ct, imageParams, node, n);
-        PPMThreadOut* threadOut = (PPMThreadOut *)malloc(sizeof(PPMThreadOut) * ct->numThreads);
+        PPMThread* thread = getDivisionThreads(ct, imageParams, node, n);
 
         for(t=0; t<ct->numThreads; t++) {
             // CARREGA PARTE DA IMAGEM PARA CADA THREAD
-            if (getImageThreads(ct, imageParams, threadIn,  t, n) == 1) {
+            if (getImageThreads(ct, imageParams, thread,  t, n) == 1) {
                 // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
-                applySmooth(ct, imageParams, threadIn, threadOut, t, n);
+                applySmooth(ct, imageParams, thread, t, n);
                 // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
-                writePPMPixels(ct, imageParams, threadOut, t, n);
+                writePPMPixels(ct, imageParams, thread, t, n);
             }
         }
-        free(threadIn);
-        free(threadOut);
+        free(thread);
     }
     free(node);
 }

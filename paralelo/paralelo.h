@@ -4,7 +4,7 @@
 #include "menu.h"
 
 PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParams);
-int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThreadOut* threadOut, int numNode);
-PPMThreadOut* paraleloNodeReadAndSmooth(initialParams* ct,  PPMImageParams* imageParams, PPMNode* node, int numNode);
+int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numNode);
+PPMThread* paraleloNodeReadAndSmooth(initialParams* ct,  PPMImageParams* imageParams, PPMNode* node, int numNode);
 
 #endif // PARALELO_H_INCLUDED

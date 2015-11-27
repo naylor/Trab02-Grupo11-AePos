@@ -11,15 +11,11 @@ typedef struct {
 
 typedef struct {
     PPMPixel *ppmIn;
-    PGMPixel *pgmIn;
-    int li, lf;
-} PPMThreadIn;
-
-typedef struct {
     PPMPixel *ppmOut;
+    PGMPixel *pgmIn;
     PGMPixel *pgmOut;
     int li, lf;
-} PPMThreadOut;
+} PPMThread;
 
 typedef struct {
     int li, lf;
@@ -40,10 +36,10 @@ typedef struct {
 void getPPMParameters(initialParams* ct, PPMImageParams* imageParams);
 void writePPMHeader(initialParams* ct, PPMImageParams* imageParams);
 int getDivisionNodes(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNodes, int numNode, int numMaxLinhas);
-PPMThreadIn* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode);
-int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThreadIn* threadIn, int numThread, int numNode);
-void writePPMPixels(initialParams* ct, PPMImageParams* imageParams, PPMThreadOut* threadOut, int numThread, int numNode);
-void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThreadIn* threadIn, PPMThreadOut* threadOut, int numThread, int numNode);
+PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode);
+int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numThread, int numNode);
+void writePPMPixels(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numThread, int numNode);
+void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numThread, int numNode);
 
 #define CREATOR "NGB"
 #define RGB_COMPONENT_COLOR 255
