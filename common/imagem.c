@@ -387,9 +387,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
     for(l=0;l<=(linhas-1);l++) {
         for(c=0;c<=imageParams->coluna-1;c++) {
 
-            float sumr=0;
-            float sumb=0;
-            float sumg=0;
+            int sumr=0;
+            int sumb=0;
+            int sumg=0;
 
 
                 sumb = thread[numThread].ppmIn[k].blue;
