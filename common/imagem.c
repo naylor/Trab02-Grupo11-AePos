@@ -382,9 +382,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
     if (thread[numThread].li != 0)
         inicio = 2*imageParams->coluna;
 
+    int fim = 0;
+    if (thread[numThread].li != 0 && thread[numThread].lf == imageParams->linha-1)
+        fim = 2*imageParams->coluna;
+
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=inicio;l<=(linhas*imageParams->coluna)+inicio;l++) {
+    for(l=inicio;l<=(linhas*imageParams->coluna)+inicio-fim;l++) {
 
             int sumr=0;
             int sumb=0;
