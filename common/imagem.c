@@ -404,9 +404,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThreadIn* th
                     if (l2 >= 0 && c2 >= 0) {
                         p = (l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
-                            sumb += threadIn[numThread].ppmIn[p].blue;
-                            sumg += threadIn[numThread].ppmIn[p].green;
-                            sumr += threadIn[numThread].ppmIn[p].red;
+                            sumb += threadIn[numThread].ppmIn[1].blue;
+                            sumg += threadIn[numThread].ppmIn[1].green;
+                            sumr += threadIn[numThread].ppmIn[1].red;
                         }
 
                         if (strcmp(imageParams->tipo, "P5")==0)
