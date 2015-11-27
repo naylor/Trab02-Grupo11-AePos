@@ -393,8 +393,8 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // SELECIONANDO OS PIXELS VIZINHOS
             // PARA CADA PIXEL NA MATRIZ
-            for(l2=l-2;l2<=l+2;l2++){
-                for(c2=c-2;c2<=c+2;c2++){
+            for(l2=-2;l2<=2;l2++){
+                for(c2=-2;c2<=2;c2++){
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMA SERA EQUIVALENTE A ZERO
