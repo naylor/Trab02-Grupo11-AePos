@@ -412,8 +412,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 }
             }
 
-            printf("%d [%d][%d][%d] \n", k, sumb, sumg, sumr);
-
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
             if (strcmp(imageParams->tipo, "P6")==0) {
                 thread[numThread].ppmOut[k].red = sumr/25;
