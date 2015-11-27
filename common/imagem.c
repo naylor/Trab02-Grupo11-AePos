@@ -303,7 +303,7 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     int offset;
 
     // PARA ESCRITA NO INICIO DO ARQUIVO
-    if (thread[numThread].li)
+    if (thread[numThread].li == 0)
         offset = 0;
 
     // PARA ESCRITA EM ALGUMA POSICAO DO ARQUIVO
