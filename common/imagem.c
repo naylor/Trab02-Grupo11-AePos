@@ -384,20 +384,41 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=0;l<=(imageParams->coluna*linhas);l++) {
+    for(l=inicio;l<=(linhas*imageParams->coluna)+inicio;l++) {
 
             int sumr=0;
             int sumb=0;
             int sumg=0;
 
+            // SELECIONANDO OS PIXELS VIZINHOS
+            // PARA CADA PIXEL NA MATRIZ
+            for(l2=l-2;l2<=l+2;l2++){
+                for(c2=c-2;c2<=c+2;c2++){
 
-                sumb = thread[numThread].ppmIn[k].blue;
-                sumg = thread[numThread].ppmIn[k].green;
-                sumr = thread[numThread].ppmIn[k].red;
+                    // SOMA APENAS SE NAO FOR PIXEL DE BORDA
+                    // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
+                    if (l2 >= 0 && c2 >= 0) {
+                        p = (l2*imageParams->coluna)+c2;
+                        if (strcmp(imageParams->tipo, "P6")==0) {
+                            sumb += thread[numThread].ppmIn[p].blue;
+                            sumg += thread[numThread].ppmIn[p].green;
+                            sumr += thread[numThread].ppmIn[p].red;
+                        }
 
-                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[k].red;
-                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[k].green;
-                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[k].blue;
+                        if (strcmp(imageParams->tipo, "P5")==0)
+                            sumg += thread[numThread].pgmIn[p].gray;
+                    }
+                }
+            }
+
+            // GUARDA O RESULTADO NA IMAGEM DE SAIDA
+            if (strcmp(imageParams->tipo, "P6")==0) {
+                thread[numThread].ppmOut[k].red = sumr/25;
+                thread[numThread].ppmOut[k].green = sumg/25;
+                thread[numThread].ppmOut[k].blue = sumb/25;
+            }
+            if (strcmp(imageParams->tipo, "P5")==0)
+                thread[numThread].pgmOut[k].gray = sumg/25;
 
             k++;
     }
