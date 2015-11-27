@@ -267,8 +267,8 @@ int main (int argc, char **argv){
 
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
-                MPI_Recv(&node[rank].li, inteiro, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
-                if (node[rank].li == -202) {
+                MPI_Recv(&completedIndexes[rank], inteiro, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
+                if (completedIndexes[rank] == -202) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADO NO DISCO
                     paraleloNodeWrite(ct, imageParams, thread, rank);

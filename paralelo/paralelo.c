@@ -60,9 +60,9 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
 
     // ESSA PARTE FOI PARALELIZADA
     // CADA THREAD APLICA O SMOOTH
-    //#pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, thread, numNode)
-   //{
-        //#pragma omp for
+    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, thread, numNode)
+    {
+        #pragma omp for
         for(t=0; t<ct->numThreads; t++) {
             // LEITURA DAS LINHAS DEFINIDAS
             // PARA CADA THREAD
@@ -70,8 +70,8 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
 
             applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
         }
-        //#pragma omp barrier
-    //}
+        #pragma omp barrier
+    }
     return thread;
 }
 

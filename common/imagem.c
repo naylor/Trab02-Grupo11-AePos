@@ -159,9 +159,6 @@ PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PP
     // THREAD VAI RECEBER
     numElementos = (int)linhas/ct->numThreads;
 
-        if (ct->debug >= 2)
-            printf("lf:%d\n", node[1].li);
-
     // COMECA A DIVISAO POR LINHA
     // MELHOR PARA CALCULAR 5x5 (NECESSARIO LER MENOS PIXELS)
     for(t=0; t <= ct->numThreads-1; t++) {
