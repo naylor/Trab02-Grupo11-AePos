@@ -391,33 +391,20 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             int sumb=0;
             int sumg=0;
 
-            // SELECIONANDO OS PIXELS VIZINHOS
-            // PARA CADA PIXEL NA MATRIZ
-            for(l2=-2;l2<=2;l2++){
-                for(c2=-2;c2<=2;c2++){
 
-                    // SOMA APENAS SE NAO FOR PIXEL DE BORDA
-                    // SE FOR, A SOMA SERA EQUIVALENTE A ZERO
-                    if ( (l+l2) >= 0) {
-                        p = ( (l+l2)*imageParams->coluna)+(c+c2);
                         if (strcmp(imageParams->tipo, "P6")==0) {
-                            sumb += thread[numThread].ppmIn[p].blue;
-                            sumg += thread[numThread].ppmIn[p].green;
-                            sumr += thread[numThread].ppmIn[p].red;
+                            sumb += thread[numThread].ppmIn[k].blue;
+                            sumg += thread[numThread].ppmIn[k].green;
+                            sumr += thread[numThread].ppmIn[k].red;
                         }
 
-                        if (strcmp(imageParams->tipo, "P5")==0)
-                            sumg += thread[numThread].pgmIn[p].gray;
-                    }
-                }
-            }
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
-            //if (strcmp(imageParams->tipo, "P6")==0) {
+            if (strcmp(imageParams->tipo, "P6")==0) {
                 thread[numThread].ppmOut[k].red = sumr/25;
                 thread[numThread].ppmOut[k].green = sumg/25;
                 thread[numThread].ppmOut[k].blue = sumb/25;
-            //}
+            }
             if (strcmp(imageParams->tipo, "P5")==0)
                 thread[numThread].pgmOut[k].gray = sumg/25;
 
