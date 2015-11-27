@@ -355,8 +355,6 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                numNode, numThread, imageParams->coluna, linhas,
                thread[numThread].li, thread[numThread].lf);
 
-    int k=0;
-
     // ALOCA MEMORIA PARA A IMAGEM DE SAIDA
     if (strcmp(imageParams->tipo, "P6")==0)
         thread[numThread].ppmOut = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
@@ -392,13 +390,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // SELECIONANDO OS PIXELS VIZINHOS
             // PARA CADA PIXEL NA MATRIZ
-            for(l2=l-2;l2<=l+2;l2++){
+            for(l2=-2;l2<=2;l2++){
                 for(c2=-2;c2<=2;c2++){
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
                     if (l2 >= 0) {
-                        p = (c2*imageParams->coluna)+l2;
+                        p = (l-l2*imageParams->coluna);
                         if (strcmp(imageParams->tipo, "P6")==0) {
                             sumb += thread[numThread].ppmIn[p].blue;
                             sumg += thread[numThread].ppmIn[p].green;
@@ -413,14 +411,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
             if (strcmp(imageParams->tipo, "P6")==0) {
-                thread[numThread].ppmOut[k].red = sumr/25;
-                thread[numThread].ppmOut[k].green = sumg/25;
-                thread[numThread].ppmOut[k].blue = sumb/25;
+                thread[numThread].ppmOut[l].red = sumr/25;
+                thread[numThread].ppmOut[l].green = sumg/25;
+                thread[numThread].ppmOut[l].blue = sumb/25;
             }
             if (strcmp(imageParams->tipo, "P5")==0)
-                thread[numThread].pgmOut[k].gray = sumg/25;
+                thread[numThread].pgmOut[l].gray = sumg/25;
 
-            k++;
     }
     if (ct->debug >= 2)
         printf("Done Smooth[%d][%d] - K[%d] \n", numNode, numThread, k);
