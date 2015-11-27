@@ -56,12 +56,12 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
 int t;
         for(t=0; t<ct->numThreads; t++) {
             // CARREGA PARTE DA IMAGEM PARA CADA THREAD
-            if (getImageThreads(ct, imageParams, thread,  t, numNode) == 1) {
+             getImageThreads(ct, imageParams, thread,  t, numNode);
                 // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
                 //applySmooth(ct, imageParams, thread, t, numNode);
                 // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
                 writePPMPixels(ct, imageParams, thread, t, numNode);
-            }
+
         }
     return thread;
 }
