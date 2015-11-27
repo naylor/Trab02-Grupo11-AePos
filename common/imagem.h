@@ -2,7 +2,7 @@
 #define IMAGEM_H_INCLUDED
 
 typedef struct {
-    signed char red,green,blue;
+    unsigned char red,green,blue;
 } PPMPixel;
 
 typedef struct {
