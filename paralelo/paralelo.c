@@ -52,26 +52,17 @@ PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParam
 
 PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode) {
 
-    PPMThread* thread;
-    // FAZ A DIVISAO DAS LINHAS RECEBIDAS
-    // PARA AS THREADS
-    thread = getDivisionThreads(ct, imageParams, node, numNode);
-    int t;
-
-    // ESSA PARTE FOI PARALELIZADA
-    // CADA THREAD APLICA O SMOOTH
-    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, thread, numNode)
-    {
-        #pragma omp for
+        PPMThread* thread = getDivisionThreads(ct, imageParams, node, numNode);
+int t;
         for(t=0; t<ct->numThreads; t++) {
-            // LEITURA DAS LINHAS DEFINIDAS
-            // PARA CADA THREAD
-            getImageThreads(ct, imageParams, thread,  t, numNode);
-
-            applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
+            // CARREGA PARTE DA IMAGEM PARA CADA THREAD
+            if (getImageThreads(ct, imageParams, thread,  t, numNode) == 1) {
+                // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
+                applySmooth(ct, imageParams, thread, t, numNode);
+                // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
+                writePPMPixels(ct, imageParams, thread, t, numNode);
+            }
         }
-        #pragma omp barrier
-    }
     return thread;
 }
 
@@ -81,10 +72,6 @@ int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThread*
 
     int t;
 
-    // PARA CADA THREAD, ESCREVE A IMAGEM
-    // NAO DA PARA PARELIZAR ESCRITA EM DISCO
-    for(t=0; t<ct->numThreads; t++)
-        writePPMPixels(ct, imageParams, thread, t, numNode);
 
     return 1;
 }
