@@ -380,11 +380,11 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
     // FORAM LIDAS, COMECAR ENTAO A APLICACAO
     // DO SMOOTH APOS ELAS
     if (thread[numThread].li != 0)
-        inicio = 0;
+        inicio = 2;
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=inicio;l<=(linhas-1)+inicio;l++) {
+    for(l=inicio;l<=(linhas)+inicio;l++) {
         for(c=0;c<=imageParams->coluna-1;c++) {
 
             int sumr=0;
