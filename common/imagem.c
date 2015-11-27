@@ -396,7 +396,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
-                    if (l >= 0) {
+                    if (l > 2) {
                         p = (l-l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
                             sumb += thread[numThread].ppmIn[p].blue;
