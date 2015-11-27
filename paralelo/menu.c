@@ -7,7 +7,7 @@
 
 // MENU INICIAL
 // AS OPCOES DE IMAGEM SAO CARREGADAS
-// AUTOMAGICAMENTE DO DIRETORIO /matrizes/
+// AUTOMAGICAMENTE DO DIRETORIO /images_in/
 void menu(initialParams* ct, int argc, char *argv[]){
 
     files* f = listDir(ct->DIRIMGIN);
