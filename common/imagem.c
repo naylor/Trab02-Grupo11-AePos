@@ -175,6 +175,13 @@ PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PP
 
         proxLinha+=numElementos+1;
 
+        // ALOCANDO MEMORIA PARA A IMAGEM DE ENTRADA
+        if (thread[t].li == 0 && thread[t].lf != 0 && thread[t].lf != imageParams->linha-1)
+            linhas += 2;
+        if (thread[t].li != 0 && thread[t].lf != imageParams->linha-1)
+            linhas += 4;
+        if (thread[t].li != 0 && thread[t].lf == imageParams->linha-1)
+            linhas += 2;
 
         if (strcmp(imageParams->tipo, "P6")==0)
             thread[t].ppmIn = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
@@ -209,6 +216,40 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
 
     // DEFININDO A POSICAO DE LEITURA NO ARQUIVO
     int offset;
+
+    // SE FOR LINHA INICIAL 0 E A FINAL 0, DEFINE O OFFSET COMO 0
+    if (thread[numThread].li == 0 && thread[numThread].lf == imageParams->linha-1)
+        offset = 0;
+
+    // SE FOR A PRIMEIRA LINHA E NAO FOR A ULTIMA
+    // LE A PARTIR DO OFFSET 0 + O SEU BLOCO + 2 LINHAS POSTERIORES
+    // POIS A THREAD PRECISARA DE 2 LINHAS POSTERIORES, FORA O SEU BLOCO,
+    // PARA O SMOOTH
+    if (thread[numThread].li == 0 && thread[numThread].lf != 0 && thread[numThread].lf != imageParams->linha-1) {
+        offset = 0;
+        linhas += 2;
+    }
+
+    // SE A THREAD PEGAR UM BLOCO DO MEIO DA IMAGEM
+    // LE AS DUAS ANTERIORES, AS DUAS POSTERIORES + O SEU BLOCO
+    if (thread[numThread].li != 0 && thread[numThread].lf != imageParams->linha-1) {
+        if (strcmp(imageParams->tipo, "P6")==0)
+            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PPMPixel);
+        else
+            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PGMPixel);
+
+        linhas += 4;
+    }
+
+    // FINAL DE ARQUIVO, LE SOMENTE AS DUAS ANTERIORES + SEU BLOCO
+    if (thread[numThread].li != 0 && thread[numThread].lf == imageParams->linha-1) {
+        if (strcmp(imageParams->tipo, "P6")==0)
+            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PPMPixel);
+        else
+            offset = ((thread[numThread].li-2)*imageParams->coluna)*sizeof(PGMPixel);
+
+        linhas += 2;
+    }
 
     // SETA O PONTEIRO NO ARQUIVO + O CABECALHO
     // PARA A LEITURA DE CADA THREAD
@@ -286,9 +327,9 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     // GRAVA O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fwrite_unlocked(thread[numThread].ppmIn, 3*imageParams->coluna, linhas, fp);
+        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna, linhas, fp);
     else
-        ret = fwrite_unlocked(thread[numThread].pgmIn, imageParams->coluna, linhas, fp);
+        ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
     if (ret == 0) {
         printf("Error Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
@@ -350,11 +391,16 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             int sumb=0;
             int sumg=0;
 
-            // SELECIONANDO OS PIXELS VIZINHOS
-            // PARA CADA PIXEL NA MATRIZ
 
 
-
+            // GUARDA O RESULTADO NA IMAGEM DE SAIDA
+            if (strcmp(imageParams->tipo, "P6")==0) {
+                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[p].blue;
+                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[p].blue;
+                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[p].blue;
+            }
+            if (strcmp(imageParams->tipo, "P5")==0)
+                thread[numThread].pgmOut[k].gray = sumg/25;
 
             k++;
         }
