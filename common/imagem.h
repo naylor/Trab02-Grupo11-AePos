@@ -6,7 +6,7 @@ typedef struct {
 } PPMPixel;
 
 typedef struct {
-    unsigned char gray;
+    signed char gray;
 } PGMPixel;
 
 typedef struct {
