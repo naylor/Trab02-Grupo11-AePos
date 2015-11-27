@@ -58,7 +58,7 @@ int t;
             // CARREGA PARTE DA IMAGEM PARA CADA THREAD
             if (getImageThreads(ct, imageParams, thread,  t, numNode) == 1) {
                 // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
-                applySmooth(ct, imageParams, thread, t, numNode);
+                //applySmooth(ct, imageParams, thread, t, numNode);
                 // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
                 writePPMPixels(ct, imageParams, thread, t, numNode);
             }
