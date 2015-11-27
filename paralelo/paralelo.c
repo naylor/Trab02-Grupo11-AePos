@@ -60,7 +60,7 @@ int t;
                 // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
                 applySmooth(ct, imageParams, thread, t, numNode);
                 // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
-                //writePPMPixels(ct, imageParams, thread, t, numNode);
+                writePPMPixels(ct, imageParams, thread, t, numNode);
             }
         }
     return thread;
