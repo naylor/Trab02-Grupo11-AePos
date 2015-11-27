@@ -400,6 +400,15 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                 for(c2=-2;c2<=2;c2++){
 
 
+                        if (strcmp(imageParams->tipo, "P6")==0) {
+                            sumb += thread[numThread].ppmIn[p].blue;
+                            sumg += thread[numThread].ppmIn[p].green;
+                            sumr += thread[numThread].ppmIn[p].red;
+                        }
+
+                        if (strcmp(imageParams->tipo, "P5")==0)
+                            sumg += thread[numThread].pgmIn[p].gray;
+
                 }
             }
             //printf("K[%d] - SUM[%d] \n", k, sumr);
