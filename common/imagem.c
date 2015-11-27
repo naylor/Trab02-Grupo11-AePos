@@ -394,26 +394,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             int sumb=0;
             int sumg=0;
 
-            // SELECIONANDO OS PIXELS VIZINHOS
-            // PARA CADA PIXEL NA MATRIZ
-            for(l2=-2;l2<=2;l2++){
-                for(c2=-2;c2<=2;c2++){
 
-                    // SOMA APENAS SE NAO FOR PIXEL DE BORDA
-                    // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
-                    if ((l+l2*imageParams->coluna)+c2 >= 0){
-                        p = (l+l2*imageParams->coluna)+c2;
-                        if (strcmp(imageParams->tipo, "P6")==0) {
-                            sumb += thread[numThread].ppmIn[p].blue;
-                            sumg += thread[numThread].ppmIn[p].green;
-                            sumr += thread[numThread].ppmIn[p].red;
-                        }
-
-                        if (strcmp(imageParams->tipo, "P5")==0)
-                            sumg += thread[numThread].pgmIn[p].gray;
-                    }
-                }
-            }
             //printf("K[%d] - SUM[%d] \n", k, sumr);
 
 
