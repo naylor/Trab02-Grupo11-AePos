@@ -50,7 +50,7 @@ void sequencial(PPMImageParams* imageParams, initialParams* ct) {
             // CARREGA PARTE DA IMAGEM PARA CADA THREAD
             if (getImageThreads(ct, imageParams, thread,  t, n) == 1) {
                 // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
-                //applySmooth(ct, imageParams, thread, t, n);
+                applySmooth(ct, imageParams, thread, t, n);
                 // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
                 writePPMPixels(ct, imageParams, thread, t, n);
             }
