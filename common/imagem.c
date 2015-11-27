@@ -392,13 +392,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // SELECIONANDO OS PIXELS VIZINHOS
             // PARA CADA PIXEL NA MATRIZ
-            for(l2=-2*imageParams->coluna;l2<=2;l2++){
+            for(l2=-2;l2<=2;l2++){
                 for(c2=-2;c2<=2;c2++){
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
-                    if (l+l2+c2 >= 0){
-                        p = l+l2+c2;
+                    if (l+l2*imageParams->coluna+c2 >= 0){
+                        p = l+l2*imageParams->coluna+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
                             sumb += thread[numThread].ppmIn[p].blue;
                             sumg += thread[numThread].ppmIn[p].green;
