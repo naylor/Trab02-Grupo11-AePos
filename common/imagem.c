@@ -384,7 +384,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=inicio;l<=(linhas)+inicio;l++) {
+    for(l=inicio;l<=(linhas-1)+inicio;l++) {
         for(c=0;c<=imageParams->coluna-1;c++) {
 
             int sumr=0;
@@ -398,7 +398,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
                     // SOMA APENAS SE NAO FOR PIXEL DE BORDA
                     // SE FOR, A SOMO SERA EQUIVALENTE A ZERO
-                    if (l2 >= 0 && c2 >= 0) {
+                    //if (l2 >= 0 && c2 >= 0) {
                         p = (l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
                             sumb += thread[numThread].ppmIn[p].blue;
@@ -408,7 +408,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
                         if (strcmp(imageParams->tipo, "P5")==0)
                             sumg += thread[numThread].pgmIn[p].gray;
-                    }
+                    //}
                 }
             }
 
