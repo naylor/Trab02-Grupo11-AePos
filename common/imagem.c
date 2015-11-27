@@ -264,7 +264,7 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     // LE O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fread_unlocked(thread[numThread].ppmIn, 3*imageParams->coluna, linhas, fp);
+        ret = fread_unlocked(thread[numThread].ppmIn, 4*imageParams->coluna, linhas, fp);
     else
         ret = fread_unlocked(thread[numThread].pgmIn, imageParams->coluna, linhas, fp);
 
@@ -327,7 +327,7 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     // GRAVA O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
-        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna-1, linhas, fp);
+        ret = fwrite_unlocked(thread[numThread].ppmOut, 3*imageParams->coluna, linhas, fp);
     else
         ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
