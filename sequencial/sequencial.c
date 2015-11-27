@@ -55,7 +55,7 @@ void sequencial(PPMImageParams* imageParams, initialParams* ct) {
                 writePPMPixels(ct, imageParams, thread, t, n);
             }
         }
-        //free(thread);
+        free(thread);
     }
-    //free(node);
+    free(node);
 }
