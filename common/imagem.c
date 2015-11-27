@@ -394,7 +394,14 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
             int sumb=0;
             int sumg=0;
 
+            // SELECIONANDO OS PIXELS VIZINHOS
+            // PARA CADA PIXEL NA MATRIZ
+            for(l2=-2;l2<=2;l2++){
+                for(c2=-2;c2<=2;c2++){
 
+
+                }
+            }
             //printf("K[%d] - SUM[%d] \n", k, sumr);
 
 
