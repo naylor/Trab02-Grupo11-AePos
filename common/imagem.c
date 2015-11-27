@@ -255,12 +255,6 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     // PARA A LEITURA DE CADA THREAD
     fseek(fp, imageParams->posIniFileIn+offset, SEEK_SET);
 
-    if (ct->debug >= 2)
-        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileIn, offset,
-               thread[numThread].li,
-               thread[numThread].lf);
-
     // LE O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
@@ -276,6 +270,12 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
         ct->erro = -101;
         return 0;
     }
+
+    if (ct->debug >= 2)
+        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileIn, offset,
+               thread[numThread].li,
+               thread[numThread].lf);
 
     fclose(fp);
 
@@ -318,12 +318,6 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     // + O CABECALHO
     fseek(fp, imageParams->posIniFileOut+offset, SEEK_SET);
 
-    if (ct->debug >= 2)
-        printf("Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileOut, offset,
-               thread[numThread].li,
-               thread[numThread].lf);
-
     // GRAVA O ARQUIVO
     int ret;
     if (strcmp(imageParams->tipo, "P6")==0)
@@ -339,6 +333,13 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
         ct->erro = -101;
         return;
     }
+
+    if (ct->debug >= 2)
+        printf("Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+               imageParams->posIniFileOut, offset,
+               thread[numThread].li,
+               thread[numThread].lf);
+
     fclose(fp);
 }
 
