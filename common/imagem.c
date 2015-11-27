@@ -420,5 +420,5 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
     }
     if (ct->debug >= 2)
-        printf("Done Smooth[%d][%d] - K[%d] \n", numNode, numThread, k);
+        printf("Done Smooth[%d][%d] \n", numNode, numThread);
 }
