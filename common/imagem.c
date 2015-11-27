@@ -401,9 +401,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
                     if (l2 >= 0 && c2 >= 0) {
                         p = (l2*imageParams->coluna)+c2;
                         if (strcmp(imageParams->tipo, "P6")==0) {
-                            //sumb += thread[numThread].ppmIn[p].blue;
-                            //sumg += thread[numThread].ppmIn[p].green;
-                            //sumr += thread[numThread].ppmIn[p].red;
+                            sumb += thread[numThread].ppmIn[p].blue;
+                            sumg += thread[numThread].ppmIn[p].green;
+                            sumr += thread[numThread].ppmIn[p].red;
                         }
 
                         if (strcmp(imageParams->tipo, "P5")==0)
@@ -414,9 +414,9 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
             // GUARDA O RESULTADO NA IMAGEM DE SAIDA
             if (strcmp(imageParams->tipo, "P6")==0) {
-                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[k].red;
-                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[k].green;
-                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[k].blue;
+                thread[numThread].ppmOut[k].red = thread[numThread].ppmIn[p].red;
+                thread[numThread].ppmOut[k].green = thread[numThread].ppmIn[p].green;
+                thread[numThread].ppmOut[k].blue = thread[numThread].ppmIn[p].blue;
             }
             if (strcmp(imageParams->tipo, "P5")==0)
                 thread[numThread].pgmOut[k].gray = sumg/25;
