@@ -175,13 +175,6 @@ PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PP
 
         proxLinha+=numElementos+1;
 
-        // ALOCANDO MEMORIA PARA A IMAGEM DE ENTRADA
-        if (thread[t].li == 0 && thread[t].lf != 0 && thread[t].lf != imageParams->linha-1)
-            linhas += 2;
-        if (thread[t].li != 0 && thread[t].lf != imageParams->linha-1)
-            linhas += 4;
-        if (thread[t].li != 0 && thread[t].lf == imageParams->linha-1)
-            linhas += 2;
 
         if (strcmp(imageParams->tipo, "P6")==0)
             thread[t].ppmIn = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
