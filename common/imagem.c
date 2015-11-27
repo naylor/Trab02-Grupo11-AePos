@@ -386,16 +386,13 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
     // PERCORRENDO OS PIXELS DO
     // PEDACO DA IMAGEM LIDA
-    for(l=inicio;l<=(linhas*imageParams->coluna)+inicio;l++) {
+    for(l=inicio;l<=(linhas*imageParams->coluna);l++) {
 
             int sumr=0;
             int sumb=0;
             int sumg=0;
 
-            // SELECIONANDO OS PIXELS VIZINHOS
-            // PARA CADA PIXEL NA MATRIZ
-            for(l2=-2;l2<=2;l2++){
-                for(c2=-2;c2<=2;c2++){
+
 
 
                         if (strcmp(imageParams->tipo, "P6")==0) {
@@ -407,8 +404,7 @@ void applySmooth(initialParams* ct, PPMImageParams* imageParams, PPMThread* thre
 
 
 
-                }
-            }
+
             //printf("K[%d] - SUM[%d] \n", k, sumr);
 
 
