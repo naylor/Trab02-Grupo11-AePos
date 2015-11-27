@@ -262,20 +262,17 @@ int getImageThreads(initialParams* ct, PPMImageParams* imageParams, PPMThread* t
     else
         ret = fread_unlocked(thread[numThread].pgmIn, imageParams->coluna, linhas, fp);
 
-    if (ret == 0) {
-        printf("Error Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+    if (ct->debug >= 2)
+        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d] R[%d]\n\n", numNode, numThread,
                imageParams->posIniFileIn, offset,
                thread[numThread].li,
-               thread[numThread].lf);
+               thread[numThread].lf, ret);
+
+    if (ret == 0) {
+        printf("Error Read Thread");
         ct->erro = -101;
         return 0;
     }
-
-    if (ct->debug >= 2)
-        printf("Read Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileIn, offset,
-               thread[numThread].li,
-               thread[numThread].lf);
 
     fclose(fp);
 
@@ -325,20 +322,17 @@ void writePPMPixels(initialParams* ct, PPMImageParams *imageParams, PPMThread* t
     else
         ret = fwrite_unlocked(thread[numThread].pgmOut, imageParams->coluna, linhas, fp);
 
-    if (ret == 0) {
-        printf("Error Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
+    if (ct->debug >= 2)
+        printf("Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d] R[%d]\n\n", numNode, numThread,
                imageParams->posIniFileOut, offset,
                thread[numThread].li,
-               thread[numThread].lf);
+               thread[numThread].lf, ret);
+
+    if (ret == 0) {
+        printf("Error Write Thread");
         ct->erro = -101;
         return;
     }
-
-    if (ct->debug >= 2)
-        printf("Write Thread[%d][%d] posIniFileIn %d, Offset %d L[%d][%d]\n\n", numNode, numThread,
-               imageParams->posIniFileOut, offset,
-               thread[numThread].li,
-               thread[numThread].lf);
 
     fclose(fp);
 }
