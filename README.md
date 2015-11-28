@@ -51,5 +51,5 @@ O rank 0 comanda a comunicação. É responsável por enviar o trabalho para os 
 
 3. Os resultados são gravados na pasta: resultados
 
-4. Imagens PPM disponíveis na pasta: images_in
+4. Imagens PPM/PGM disponíveis na pasta: images_in
 5. Imagens processadas com Smooth na pasta: images_out
