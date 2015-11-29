@@ -21,7 +21,7 @@ void stop_timer(timer* t) {
 double total_timer(timer* t) {
 	//timeval diff
     t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
-    t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
+    //t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
 
     return t->timeval_diff;
 }
