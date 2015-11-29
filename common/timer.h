@@ -8,15 +8,12 @@
 #ifdef __linux__ // || _unix_ || _unix
 	typedef struct timer_t {
 		struct timeval timeval_start, timeval_end;
-		struct timespec timespec_start, timespec_end;
-		clock_t clock_start, clock_end, clock_diff;
-		double timeval_diff, timeval_diff_s, timeval_diff_u, timespec_diff, clock_diff_time;
+		double timeval_diff, timeval_diff_s, timeval_diff_u;
 	} timer;
 #else
 	typedef struct timer_t {
 		struct timeval timeval_start, timeval_end;
-		clock_t clock_start, clock_end, clock_diff;
-		double timeval_diff, timeval_diff_s, timeval_diff_u, timespec_diff, clock_diff_time;
+		double timeval_diff, timeval_diff_s, timeval_diff_u;
 	} timer;
 #endif
 
