@@ -19,7 +19,7 @@ typedef struct {
 
 void start_timer(timer* t);
 void stop_timer(timer* t);
-void total_timer(tempo* t);
+void total_timer(timer* t);
 void show_timer(tempo* t, int numNodes);
 
 #endif
