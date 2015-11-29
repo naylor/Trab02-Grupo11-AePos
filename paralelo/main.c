@@ -271,7 +271,7 @@ int main (int argc, char **argv){
                 MPI_Recv(&completedIndexes[rank], inteiro, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
                 if (completedIndexes[rank] == -202) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
-                    //GRAVA IMAGEM PROCESSADO NO DISCO
+                    //GRAVA IMAGEM PROCESSADA NO DISCO
                     start_timer(tempoW); // INICIA O RELOGIO
                     paraleloNodeWrite(ct, imageParams, thread, rank);
                     stop_timer(tempoW); // PARA O RELOGIO
@@ -280,7 +280,7 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
                     total_timer(relogio, tempoA, tempoR, tempoS, tempoW, rank);
 
-                printf("RRR: %.0fms\n", relogio[rank].tempoW);
+                printf("RRR: %.0fms\n", tempoW.timeval_diff);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_DOUBLE, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_DOUBLE, 0, 16, MPI_COMM_WORLD);

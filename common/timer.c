@@ -20,14 +20,14 @@ void stop_timer(timer* t) {
 
 void total_timer(tempo* t, timer* a, timer* r, timer* s, timer* w, int numNode) {
 	//timeval diff
-    t[numNode].tempoA = a->timeval_diff_s * 1000.0; // sec to ms
-    t[numNode].tempoA += a->timeval_diff_u / 1000.0; // us to ms
-    t[numNode].tempoR = r->timeval_diff_s * 1000.0; // sec to ms
-    t[numNode].tempoR += r->timeval_diff_u / 1000.0; // us to ms
-    t[numNode].tempoS = s->timeval_diff_s * 1000.0; // sec to ms
-    t[numNode].tempoS += s->timeval_diff_u / 1000.0; // us to ms
-    t[numNode].tempoW = w->timeval_diff_s * 1000.0; // sec to ms
-    t[numNode].tempoW += w->timeval_diff_u / 1000.0; // us to ms
+    a->timeval_diff = a->timeval_diff_s * 1000.0; // sec to ms
+    a->timeval_diff += a->timeval_diff_u / 1000.0; // us to ms
+    r->timeval_diff = r->timeval_diff_s * 1000.0; // sec to ms
+    r->timeval_diff += r->timeval_diff_u / 1000.0; // us to ms
+    s->timeval_diff = s->timeval_diff_s * 1000.0; // sec to ms
+    s->timeval_diff += s->timeval_diff_u / 1000.0; // us to ms
+    w->timeval_diff = w->timeval_diff_s * 1000.0; // sec to ms
+    w->timeval_diff += w->timeval_diff_u / 1000.0; // us to ms
 }
 
 void show_timer(tempo* t, int numNodes) {
