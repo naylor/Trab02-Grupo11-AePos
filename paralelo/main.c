@@ -41,8 +41,8 @@ int main (int argc, char **argv){
     timer* tempoS = (timer *)malloc(sizeof(timer));
     timer* tempoW = (timer *)malloc(sizeof(timer));
 
-    tempoR.timeval_diff_s = 0;
-    tempoR.timeval_diff_u = 0;
+    tempoR->timeval_diff_s = 0;
+    tempoR->timeval_diff_u = 0;
 
     int completedIndexes[50];
     int inteiro = 2;
