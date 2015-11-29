@@ -72,7 +72,8 @@ int main (int argc, char **argv){
             ct->numProcessos = 0;
         }
     }
-
+            //CARREGA O RELOGIO
+            start_timer(tempoA);
     //ENVIANDO AS CONFIGURACOES BASICAS PARA
     //OS PROCESSOS TRABALHAREM
     MPI_Bcast ( &imageParams->coluna, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
@@ -88,8 +89,7 @@ int main (int argc, char **argv){
     if (rank == 0) {
         if (ct->filePath != NULL) {
 
-            //CARREGA O RELOGIO
-            start_timer(tempoA);
+
 
             int gravar=0;
             int ler=0;
