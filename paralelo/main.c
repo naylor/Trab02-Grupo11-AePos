@@ -37,9 +37,7 @@ int main (int argc, char **argv){
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
     timer* tempoA = (timer *)malloc(sizeof(timer));
-    timer* tempoR = (timer *)malloc(sizeof(timer));
-    timer* tempoS = (timer *)malloc(sizeof(timer));
-    timer* tempoW = (timer *)malloc(sizeof(timer));
+
 
     int completedIndexes[50];
     int inteiro = 2;
@@ -227,7 +225,9 @@ int main (int argc, char **argv){
     //FIM RANK 0
     } else {
     //INICIO DOS NODES
-
+    timer* tempoR = (timer *)malloc(sizeof(timer));
+    timer* tempoS = (timer *)malloc(sizeof(timer));
+    timer* tempoW = (timer *)malloc(sizeof(timer));
         char hostname[255];
         gethostname(hostname,255);
         int stop = 0;
