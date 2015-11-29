@@ -34,7 +34,7 @@ int main (int argc, char **argv){
     PPMImageParams* imageParams = (PPMImageParams *)malloc(sizeof(PPMImageParams));
     PPMNode* node = (PPMNode *)malloc(sizeof(PPMNode) * size+1);
 
-    // RELOGIA PARA CADA NODE
+    // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
     timer* tempoA = (timer *)malloc(sizeof(timer));
     timer* tempoR = (timer *)malloc(sizeof(timer));
@@ -300,6 +300,8 @@ int main (int argc, char **argv){
 
         //PARA O RELOGIO
         stop_timer(tempoA);
+
+                printf("RRR: %d\n", tempoA);
 
         total_timer(tempoA);
         show_timer(relogio, ct->numProcessos);
