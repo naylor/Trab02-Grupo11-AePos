@@ -278,7 +278,7 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-                    total_timer(relogio, tempoA, tempoR, tempoS, tempoW, rank);
+                    relogio[rank].tempoW = total_timer(tempoW);
 
                 printf("RRR: %.0fms\n", tempoW->timeval_diff);
 

@@ -18,16 +18,10 @@ void stop_timer(timer* t) {
 	t->timeval_diff_u += t->timeval_end.tv_usec - t->timeval_start.tv_usec;
 }
 
-void total_timer(tempo* t, timer* a, timer* r, timer* s, timer* w, int numNode) {
+return total_timer(timer* t) {
 	//timeval diff
-    a->timeval_diff = a->timeval_diff_s * 1000.0; // sec to ms
-    a->timeval_diff += a->timeval_diff_u / 1000.0; // us to ms
-    r->timeval_diff = r->timeval_diff_s * 1000.0; // sec to ms
-    r->timeval_diff += r->timeval_diff_u / 1000.0; // us to ms
-    s->timeval_diff = s->timeval_diff_s * 1000.0; // sec to ms
-    s->timeval_diff += s->timeval_diff_u / 1000.0; // us to ms
-    w->timeval_diff = w->timeval_diff_s * 1000.0; // sec to ms
-    w->timeval_diff += w->timeval_diff_u / 1000.0; // us to ms
+    t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
+    t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
 }
 
 void show_timer(tempo* t, int numNodes) {
