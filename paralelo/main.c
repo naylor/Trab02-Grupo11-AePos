@@ -85,7 +85,7 @@ int main (int argc, char **argv){
         if (ct->filePath != NULL) {
 
             //CARREGA O RELOGIO
-            start_timer(relogio[rank].tempoA);
+            //start_timer(relogio[rank].tempoA);
 
             int gravar=0;
             int ler=0;
