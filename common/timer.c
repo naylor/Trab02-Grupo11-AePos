@@ -41,8 +41,8 @@ void show_timer(tempo* t, int numNodes) {
     }
 
 	//timeval diff
-    printf("[Time Read] %.0fms\n", tempoR);
-    printf("[Time Smooth] %.0fms\n", tempoS);
-    printf("[Time Write] %.0fms\n", tempoW);
+    printf("[Time Read] %.0fms\n", tempoR/numNodes);
+    printf("[Time Smooth] %.0fms\n", tempoS/numNodes);
+    printf("[Time Write] %.0fms\n", tempoW/numNodes);
     printf("[Time App] %.0fms\n", tempoA);
 }
