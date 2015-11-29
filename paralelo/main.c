@@ -301,7 +301,7 @@ int main (int argc, char **argv){
         //PARA O RELOGIO
         stop_timer(tempoA);
 
-        total_timer(relogio, tempoA, tempoR, tempoS, tempoW, rank);
+        total_timer(tempoA);
         show_timer(relogio, ct->numProcessos);
 
         //ESCREVE NO ARQUIVO DE LOGS
