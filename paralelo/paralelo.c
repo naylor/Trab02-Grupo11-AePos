@@ -85,6 +85,7 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
             {
                 stop_timer(tempoS);
             }
+        }
         #pragma omp barrier
     }
     return thread;
