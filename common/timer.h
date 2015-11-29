@@ -8,6 +8,7 @@
 typedef struct {
     struct timeval timeval_start, timeval_end;
     double timeval_diff, timeval_diff_s, timeval_diff_u;
+    float total;
 } tempoParams;
 
 typedef struct {
@@ -19,6 +20,7 @@ typedef struct {
 
 void start_timer(tempoParams* t);
 void stop_timer(tempoParams* t);
-void show_timer(tempo* t);
+void total_timer(tempoParams* t);
+void show_timer(tempo* t, int numNodes);
 
 #endif
