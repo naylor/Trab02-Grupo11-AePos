@@ -269,7 +269,9 @@ int main (int argc, char **argv){
                 thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, rank);
                     stop_timer(tempoF); // PARA O RELOGIO
                     relogio[rank].tempoF = total_timer(tempoF);
-                printf("F %f \n", relogio[rank].tempoF);
+
+                printf("%d F %f \n", rank, relogio[rank].tempoF);
+
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
                     MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
