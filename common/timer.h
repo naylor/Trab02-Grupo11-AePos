@@ -11,10 +11,10 @@ typedef struct {
 } timer;
 
 typedef struct {
-    float tempoA; // TEMPO DA APLICACAO
-    float tempoR; // TEMPO DA LEITURA
-    float tempoW; // TEMPO DA GRAVACAO
-    float tempoS; // TEMPO DO FILTRO
+    double tempoA; // TEMPO DA APLICACAO
+    double tempoR; // TEMPO DA LEITURA
+    double tempoW; // TEMPO DA GRAVACAO
+    double tempoS; // TEMPO DO FILTRO
 } tempo;
 
 void start_timer(timer* t);

@@ -32,10 +32,10 @@ void total_timer(tempo* t, timer* a, timer* r, timer* s, timer* w, int numNode) 
 
 void show_timer(tempo* t, int numNodes) {
 
-    float tempoR=0;
-    float tempoS=0;
-    float tempoW=0;
-    float tempoA=0;
+    double tempoR=0;
+    double tempoS=0;
+    double tempoW=0;
+    double tempoA=0;
     int i;
     for(i=0; i <= numNodes; i++) {
         tempoR += t[i].tempoR;
