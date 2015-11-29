@@ -290,12 +290,12 @@ int main (int argc, char **argv){
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
 
-                    relogio[rank].tempoR = total_timer(tempoR);
-                    relogio[rank].tempoF = total_timer(tempoF);
+                    relogio[rank].tempoR = total_timer(tempoF);
+                    relogio[rank].tempoF = total_timer(tempoR);
                     relogio[rank].tempoW = total_timer(tempoW);
 
-                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
