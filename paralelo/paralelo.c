@@ -51,7 +51,7 @@ PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParam
 }
 
 PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams,
-                                     PPMNode* node, timer* tempoS, timer* tempoR, int numNode) {
+                                     PPMNode* node, timer* tempoR, timer* tempoS, int numNode) {
 
     PPMThread* thread;
     // FAZ A DIVISAO DAS LINHAS RECEBIDAS
@@ -73,7 +73,7 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
 
             start_timer(tempoS);
             applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
-            stop_timer(tempoR);
+            stop_timer(tempoS);
         }
         #pragma omp barrier
     }

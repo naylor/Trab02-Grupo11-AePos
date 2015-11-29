@@ -253,7 +253,7 @@ int main (int argc, char **argv){
                 //PARA AS THREADS
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
-                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoS, tempoR, rank);
+                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, tempoS, rank);
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
