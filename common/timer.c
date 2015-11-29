@@ -31,8 +31,14 @@ void total_timer(tempo* t, int numNode) {
 }
 
 void show_timer(tempo* t, int numNodes) {
+
+    float tempoR;
+    for(i=1; i <= numNodes; i++) {
+        tempoR += t[numNode].tempoR->total;
+    }
+
 	//timeval diff
-    printf("[Time Read] %.0fms\n", t->tempoR->total);
+    printf("[Time Read] %.0fms\n", tempoR);
     printf("[Time Smooth] %.0fms\n", t->tempoS->total);
     printf("[Time Write] %.0fms\n", t->tempoW->total);
     printf("[Time App] %.0fms\n", t->tempoA->total);
