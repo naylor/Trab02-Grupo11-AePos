@@ -37,7 +37,7 @@ void show_timer(tempo* t, int numNodes) {
     float tempoW=0;
     float tempoA=0;
     int i;
-    for(i=1; i <= numNodes; i++) {
+    for(i=0; i <= numNodes; i++) {
         tempoR += t[i].tempoR;
         tempoS += t[i].tempoS;
         tempoW += t[i].tempoW;
