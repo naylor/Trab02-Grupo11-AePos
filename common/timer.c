@@ -35,7 +35,7 @@ void show_timer(tempo* t, int numNodes) {
     float tempoR;
     int i;
     for(i=1; i <= numNodes; i++) {
-        tempoR += t[i].tempoR->total;
+        //tempoR += t[i].tempoR->total;
     }
 
 	//timeval diff
