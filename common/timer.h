@@ -13,8 +13,8 @@ typedef struct {
 typedef struct {
     float tempoA; // TEMPO DA APLICACAO
     float tempoR; // TEMPO DA LEITURA
+    float tempoF; // TEMPO DA LEITURA
     float tempoW; // TEMPO DA GRAVACAO
-    float tempoF; // TEMPO DO FILTRO
 } tempo;
 
 void start_timer(timer* t);

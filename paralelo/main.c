@@ -266,7 +266,6 @@ int main (int argc, char **argv){
                 //APLICA SMOOTH
                 start_timer(tempoF); // INICIA O RELOGIO
                 thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, rank);
-                sleep(1);
                     stop_timer(tempoF); // PARA O RELOGIO
 
                 if (ct->leituraIndividual == 1) {
