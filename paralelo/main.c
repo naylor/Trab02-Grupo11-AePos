@@ -37,7 +37,7 @@ int main (int argc, char **argv){
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
-    char completedIndexes[1]='I';
+    char[1] completedIndexes='I';
     int inteiro = 2;
 
     if ( rank == 0 ) {
@@ -154,7 +154,7 @@ int main (int argc, char **argv){
                                 {
                                     if (gravar == 0) {
                                         gravar = 1;
-                                       completedIndexes = 'W';
+                                        completedIndexes = 'W';
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
                                         MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
