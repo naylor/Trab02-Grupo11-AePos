@@ -210,7 +210,7 @@ int main (int argc, char **argv){
 
             printf("[Time Read] %f ms\n", relogio[1].tempoS);
 
-            show_timer(relogio, ct->numProcessos);
+            //show_timer(relogio, ct->numProcessos);
 
             //ESCREVE NO ARQUIVO DE LOGS
             writeFile(imageParams, relogio, ct);
@@ -293,12 +293,8 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
 
                     relogio[rank].tempoR = total_timer(tempoR);
-
-                    printf("[Time Read] %d ms\n", relogio[rank].tempoR);
-
-                    //total_timer(relogio, rank, tempoS);
-                    //total_timer(relogio, rank, tempoW);
-
+                    relogio[rank].tempoS = total_timer(tempoS);
+                    relogio[rank].tempoW = total_timer(tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
