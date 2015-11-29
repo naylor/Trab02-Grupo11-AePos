@@ -31,16 +31,10 @@ void show_timer(tempo* t, int numNodes) {
     double tempoW=0;
     double tempoA=0;
     int i;
-    for(i=0; i <= numNodes; i++) {
-        tempoR += t[i].tempoR;
-        tempoS += t[i].tempoS;
-        tempoW += t[i].tempoW;
-        tempoA += t[i].tempoA;
-    }
 
 	//timeval diff
     printf("[Time Read] %.0fms\n", tempoR);
     printf("[Time Smooth] %.0fms\n", tempoS);
     printf("[Time Write] %.0fms\n", tempoW);
-    printf("[Time App] %.0fms\n", tempoA);
+    printf("[Time App] %.0fms\n", t[0].tempoA);
 }
