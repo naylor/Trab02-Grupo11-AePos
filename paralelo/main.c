@@ -158,9 +158,9 @@ int main (int argc, char **argv){
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
                                         MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
-                                        MPI_Recv(&relogio[i].tempoR, 4, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoS, 4, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoW, 4, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoS, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
@@ -295,11 +295,11 @@ int main (int argc, char **argv){
                     total_timer(relogio, rank, tempoS);
                     total_timer(relogio, rank, tempoW);
 
-                    printf("[Time Read] %f ms\n", relogio[rank].tempoS);
+                    printf("[Time Read] %f ms\n", tempoS.timeval_diff);
 
-                    MPI_Ssend(&relogio[rank].tempoR, 4, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoS, 4, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 4, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
