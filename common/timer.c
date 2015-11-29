@@ -23,7 +23,7 @@ double total_timer(timer* t) {
     t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
     t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
 
-    return t->timeval_diff;
+    return scanf ("%.f",t->timeval_diff);
 }
 
 void show_timer(tempo* t, int numNodes) {
