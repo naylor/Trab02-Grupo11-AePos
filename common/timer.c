@@ -39,7 +39,7 @@ void show_timer(tempo* t, int numNodes) {
     }
 
     t[0].tempoR = tempoR/numNodes;
-    t[0].tempoF = tempoR/numNodes;
+    t[0].tempoF = tempoF/numNodes;
     t[0].tempoW = tempoW/numNodes;
 
 	//timeval diff
