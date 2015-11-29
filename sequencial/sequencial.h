@@ -3,6 +3,7 @@
 
 #include "menu.h"
 
-void sequencial(PPMImageParams* imageParams, initialParams *ct);
+void sequencial(PPMImageParams* imageParams, initialParams *ct,
+                timer* tempoR, timer* tempoS, timer* tempoW);
 
 #endif // SEQUENCIAL_H_INCLUDED

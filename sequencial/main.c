@@ -33,23 +33,35 @@ int main (int argc, char *argv[]){
         sprintf((char*) &imageParams->fileIn, "%s%s", ct->DIRIMGIN, ct->filePath);
 
         if (ct->filePath != NULL) {
-            // RELOGIA PARA CADA NODE
-            tempo* tempos = (tempo* )malloc(sizeof(tempo));
+            // RELOGIO
+            tempo* relogio = (tempo* )malloc(sizeof(tempo)*2);
 
             //CARREGA O RELOGIO
-            //start_timer(tempo);
+            timer* tempoA = (timer *)malloc(sizeof(timer));
+            timer* tempoR = (timer *)malloc(sizeof(timer));
+            timer* tempoS = (timer *)malloc(sizeof(timer));
+            timer* tempoW = (timer *)malloc(sizeof(timer));
 
-            sequencial(imageParams, ct);
+            start_timer(tempoA);
+
+            sequencial(imageParams, ct, tempoR, tempoS, tempoW);
 
             //PARA O RELOGIO
-            //stop_timer(tempoA);
+            stop_timer(tempoA);
+
+            relogio[0].tempoA = total_timer(tempoA);
+            relogio[1].tempoR = total_timer(tempoR);
+            relogio[1].tempoS = total_timer(tempoS);
+            relogio[1].tempoW = total_timer(tempoW);
+
+            show_timer(relogio, 1);
 
             // ESCREVENDO OS RESULTADOS
             // NO ARQUIVO /resultados/
-            writeFile(imageParams, tempos, ct);
+            writeFile(imageParams, relogio, ct);
 
             // LIMPANDO A MEMORIA
-            cleanMemory(imageParams, tempos, ct);
+            cleanMemory(imageParams, relogio, ct);
 
         } else {
             printf("\nOpcao invalida!\n\n");
