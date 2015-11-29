@@ -265,7 +265,7 @@ int main (int argc, char **argv){
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
                 start_timer(tempoF); // INICIA O RELOGIO
-                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, tempoF, rank);
+                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, rank);
                     stop_timer(tempoF); // PARA O RELOGIO
 
                 if (ct->leituraIndividual == 1) {
