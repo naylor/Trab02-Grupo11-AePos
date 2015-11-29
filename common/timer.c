@@ -20,14 +20,10 @@ void stop_timer(timer* t) {
 
 void total_timer(tempo* t, timer* a, timer* r, timer* s, timer* w, int numNode) {
 	//timeval diff
-    if (a->timeval_diff_s != 0) {
-        t[numNode].tempoA = a->timeval_diff_s * 1000.0; // sec to ms
-        t[numNode].tempoA += a->timeval_diff_u / 1000.0; // us to ms
-    }
-    if (r->timeval_diff_s != 0) {
-        t[numNode].tempoR = r->timeval_diff_s * 1000.0; // sec to ms
-        t[numNode].tempoR += r->timeval_diff_u / 1000.0; // us to ms
-    }
+    t[numNode].tempoA = a->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoA += a->timeval_diff_u / 1000.0; // us to ms
+    t[numNode].tempoR = r->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoR += r->timeval_diff_u / 1000.0; // us to ms
     t[numNode].tempoS = s->timeval_diff_s * 1000.0; // sec to ms
     t[numNode].tempoS += s->timeval_diff_u / 1000.0; // us to ms
     t[numNode].tempoW = w->timeval_diff_s * 1000.0; // sec to ms
@@ -49,7 +45,7 @@ void show_timer(tempo* t, int numNodes) {
     }
 
 	//timeval diff
-    printf("[Time Read] %.0fms\n", t[1].tempoR);
+    printf("[Time Read] %.0fms\n", tempoR);
     printf("[Time Smooth] %.0fms\n", tempoS);
     printf("[Time Write] %.0fms\n", tempoS);
     printf("[Time App] %.0fms\n", tempoA);
