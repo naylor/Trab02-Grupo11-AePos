@@ -18,7 +18,7 @@ void stop_timer(timer* t) {
 	t->timeval_diff_u += t->timeval_end.tv_usec - t->timeval_start.tv_usec;
 }
 
-return total_timer(timer* t) {
+void total_timer(timer* t) {
 	//timeval diff
     t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
     t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
