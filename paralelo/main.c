@@ -206,7 +206,7 @@ int main (int argc, char **argv){
             //PARA O RELOGIO
             stop_timer(tempoA);
 
-            total_timer(relogio, rank, tempoA);
+            //total_timer(relogio, rank, tempoA);
 
             printf("[Time Read] %f ms\n", relogio[1].tempoS);
 
@@ -296,8 +296,8 @@ int main (int argc, char **argv){
 
                     printf("[Time Read] %d ms\n", relogio[rank].tempoR);
 
-                    total_timer(relogio, rank, tempoS);
-                    total_timer(relogio, rank, tempoW);
+                    //total_timer(relogio, rank, tempoS);
+                    //total_timer(relogio, rank, tempoW);
 
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
