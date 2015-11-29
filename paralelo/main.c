@@ -72,8 +72,7 @@ int main (int argc, char **argv){
             ct->numProcessos = 0;
         }
     }
-            //CARREGA O RELOGIO
-            start_timer(tempoA);
+
     //ENVIANDO AS CONFIGURACOES BASICAS PARA
     //OS PROCESSOS TRABALHAREM
     MPI_Bcast ( &imageParams->coluna, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
@@ -89,7 +88,8 @@ int main (int argc, char **argv){
     if (rank == 0) {
         if (ct->filePath != NULL) {
 
-
+            //CARREGA O RELOGIO
+            start_timer(tempoA);
 
             int gravar=0;
             int ler=0;
@@ -205,7 +205,10 @@ int main (int argc, char **argv){
                 #pragma omp barrier
             }
             printf("\n");
+        //PARA O RELOGIO
+        stop_timer(tempoA);
 
+                printf("RRR: %d\n", tempoA);
         } else {
             printf("\nOpcao invalida!\n\n");
             exit(0);
@@ -298,10 +301,7 @@ int main (int argc, char **argv){
 
     if (rank == 0) {
 
-        //PARA O RELOGIO
-        stop_timer(tempoA);
 
-                printf("RRR: %d\n", tempoA);
 
         total_timer(tempoA);
         show_timer(relogio, ct->numProcessos);
