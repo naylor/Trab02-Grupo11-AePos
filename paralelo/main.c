@@ -203,14 +203,6 @@ int main (int argc, char **argv){
                 #pragma omp barrier
             }
             printf("\n");
-            //PARA O RELOGIO
-            stop_timer(relogio[rank].tempoA);
-            show_timer(relogio);
-
-            //ESCREVE NO ARQUIVO DE LOGS
-            writeFile(imageParams, relogio, ct);
-
-            if (ct->debug >= 1) printf("All Server finalizados: %d\n", rank);
 
         } else {
             printf("\nOpcao invalida!\n\n");
@@ -296,6 +288,17 @@ int main (int argc, char **argv){
 
     MPI_Barrier(MPI_COMM_WORLD);
 
+    if (rank == 0) {
+            //PARA O RELOGIO
+            stop_timer(relogio[rank].tempoA);
+            show_timer(relogio);
+
+            //ESCREVE NO ARQUIVO DE LOGS
+            writeFile(imageParams, relogio, ct);
+
+            if (ct->debug >= 1) printf("All Server finalizados: %d\n", rank);
+
+    }
     free(node);
     free(ct);
     free(imageParams);
