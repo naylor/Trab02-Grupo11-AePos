@@ -7,7 +7,7 @@
 
 typedef struct {
     struct timeval timeval_start, timeval_end;
-    double timeval_diff, timeval_diff_s, timeval_diff_u;
+    double timeval_diff_s, timeval_diff_u;
 } timer;
 
 typedef struct {
