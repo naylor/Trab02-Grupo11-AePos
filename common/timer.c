@@ -19,13 +19,8 @@ void stop_timer(timer* t) {
 }
 
 double total_timer(timer* t) {
-	//timeval diff
-    t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
-    t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
-	#ifdef __linux__
-	#else
-		t->timespec_diff = 0;
-	#endif
+	t->timeval_diff = (t->timeval_end.tv_sec - t->timeval_start.tv_sec) * 1000.0; // sec to ms
+	t->timeval_diff += (t->timeval_end.tv_usec - t->timeval_start.tv_usec) / 1000.0; // us to ms
     return t->timeval_diff;
 }
 
