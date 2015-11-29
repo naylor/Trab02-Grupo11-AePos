@@ -81,7 +81,7 @@ int main (int argc, char **argv){
     MPI_Bcast ( &ct->numThreads, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &ct->debug, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
 
-    relogio[rank] = (tempo* )malloc(sizeof(tempoParams));
+    relogio[rank].tempoA = (tempoParams *)malloc(sizeof(tempoParams));
 
     if (rank == 0) {
         if (ct->filePath != NULL) {
