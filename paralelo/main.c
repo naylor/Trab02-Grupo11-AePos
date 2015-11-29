@@ -38,7 +38,7 @@ int main (int argc, char **argv){
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
     int completedIndexes[50];
-    int inteiro = 1;
+    int inteiro = 2;
 
     if ( rank == 0 ) {
         //VERIFICANDO SE O ARQUIVO
