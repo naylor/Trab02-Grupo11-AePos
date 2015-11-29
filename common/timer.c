@@ -33,7 +33,8 @@ void total_timer(tempo* t, int numNode) {
 void show_timer(tempo* t, int numNodes) {
 
     float tempoR;
-    for(int i=1; i <= numNodes; i++) {
+    int i;
+    for(i=1; i <= numNodes; i++) {
         tempoR += t[i].tempoR->total;
     }
 
