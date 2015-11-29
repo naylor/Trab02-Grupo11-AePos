@@ -291,11 +291,12 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
+                                        printf("[Time Read] %f ms\n", tempoS->timeval_diff);
+
                     total_timer(relogio, rank, tempoR);
                     total_timer(relogio, rank, tempoS);
                     total_timer(relogio, rank, tempoW);
 
-                    printf("[Time Read] %f ms\n", tempoS->timeval_diff);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
