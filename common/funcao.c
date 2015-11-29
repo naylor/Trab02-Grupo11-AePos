@@ -102,10 +102,10 @@ void writeFile(PPMImageParams* imageParams, tempo* t, initialParams* ct) {
         ct->cargaAleatoria?"yes":"no",
         imageParams->linha,
         imageParams->coluna,
-		t->tempoR,
-		t->tempoS,
-		t->tempoW,
-		t->tempoA);
+		t[0].tempoR,
+		t[0].tempoS,
+		t[0].tempoW,
+		t[0].tempoA);
 
 	fclose(f);
 }
