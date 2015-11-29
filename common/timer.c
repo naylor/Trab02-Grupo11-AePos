@@ -39,7 +39,7 @@ void show_timer(tempo* t, int numNodes) {
     }
 
 	//timeval diff
-    printf("[Time Read] %.0fms\n", tempoR);
+    printf("[Time Read] %.0fms\n", t[1].tempoR->total);
     printf("[Time Smooth] %.0fms\n", t->tempoS->total);
     printf("[Time Write] %.0fms\n", t->tempoW->total);
     printf("[Time App] %.0fms\n", t->tempoA->total);
