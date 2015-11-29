@@ -29,22 +29,22 @@ double total_timer(timer* t) {
 void show_timer(tempo* t, int numNodes) {
 
     double tempoR=0;
-    double tempoS=0;
+    double tempoF=0;
     double tempoW=0;
     int i;
-    for(i=0; i <= numNodes; i++) {
+    for(i=1; i <= numNodes; i++) {
         tempoR += t[i].tempoR;
-        tempoS += t[i].tempoS;
+        tempoF += t[i].tempoF;
         tempoW += t[i].tempoW;
     }
 
     t[0].tempoR = tempoR/numNodes;
-    t[0].tempoS = tempoS/numNodes;
+    t[0].tempoF = tempoF/numNodes;
     t[0].tempoW = tempoW/numNodes;
 
 	//timeval diff
     printf("[Time Read] %.2fms\n", t[0].tempoR);
-    printf("[Time Smooth] %.2fms\n", t[0].tempoS);
+    printf("[Time Smooth] %.2fms\n", t[0].tempoF);
     printf("[Time Write] %.2fms\n", t[0].tempoW);
     printf("[Time App] %.2fms\n", t[0].tempoA);
 }

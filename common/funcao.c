@@ -103,7 +103,7 @@ void writeFile(PPMImageParams* imageParams, tempo* t, initialParams* ct) {
         imageParams->linha,
         imageParams->coluna,
 		t[0].tempoR,
-		t[0].tempoS,
+		t[0].tempoF,
 		t[0].tempoW,
 		t[0].tempoA);
 

@@ -6,7 +6,7 @@
 #include "main.h"
 
 void sequencial(PPMImageParams* imageParams, initialParams* ct,
-                timer* tempoR, timer* tempoS, timer* tempoW) {
+                timer* tempoR, timer* tempoF, timer* tempoW) {
 
     //CARREGANDO CABECALHO DA IMAGEM
     //COM O TAMANHO DA IMAGEM
@@ -54,9 +54,9 @@ void sequencial(PPMImageParams* imageParams, initialParams* ct,
             stop_timer(tempoR);
 
             // APLICA O SMOOTH NA IMAGEM PARA CADA THREAD
-            start_timer(tempoS);
+            start_timer(tempoF);
             applySmooth(ct, imageParams, thread, t, n);
-            stop_timer(tempoS);
+            stop_timer(tempoF);
 
             // GRAVA O RESULTADO DO SMOOTH DE CADA THREAD NO ARQUIVO
             start_timer(tempoW);

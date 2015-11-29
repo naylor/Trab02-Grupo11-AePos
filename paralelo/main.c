@@ -159,7 +159,7 @@ int main (int argc, char **argv){
                                         MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
                                         MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoS, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
                                         MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
@@ -224,7 +224,7 @@ int main (int argc, char **argv){
     } else {
     //INICIO DOS NODES
         timer* tempoR = (timer *)malloc(sizeof(timer));
-        timer* tempoS = (timer *)malloc(sizeof(timer));
+        timer* tempoF = (timer *)malloc(sizeof(timer));
         timer* tempoW = (timer *)malloc(sizeof(timer));
         char hostname[255];
         gethostname(hostname,255);
@@ -264,7 +264,7 @@ int main (int argc, char **argv){
                 //PARA AS THREADS
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
-                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, tempoS, rank);
+                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, tempoF, rank);
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
@@ -291,11 +291,11 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
 
                     relogio[rank].tempoR = total_timer(tempoR);
-                    relogio[rank].tempoS = total_timer(tempoS);
+                    relogio[rank].tempoF = total_timer(tempoF);
                     relogio[rank].tempoW = total_timer(tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);

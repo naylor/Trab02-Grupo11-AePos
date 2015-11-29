@@ -39,19 +39,19 @@ int main (int argc, char *argv[]){
             //CARREGA O RELOGIO
             timer* tempoA = (timer *)malloc(sizeof(timer));
             timer* tempoR = (timer *)malloc(sizeof(timer));
-            timer* tempoS = (timer *)malloc(sizeof(timer));
+            timer* tempoF = (timer *)malloc(sizeof(timer));
             timer* tempoW = (timer *)malloc(sizeof(timer));
 
             start_timer(tempoA);
 
-            sequencial(imageParams, ct, tempoR, tempoS, tempoW);
+            sequencial(imageParams, ct, tempoR, tempoF, tempoW);
 
             //PARA O RELOGIO
             stop_timer(tempoA);
 
             relogio[0].tempoA = total_timer(tempoA);
             relogio[1].tempoR = total_timer(tempoR);
-            relogio[1].tempoS = total_timer(tempoS);
+            relogio[1].tempoF = total_timer(tempoF);
             relogio[1].tempoW = total_timer(tempoW);
 
             show_timer(relogio, 1);
