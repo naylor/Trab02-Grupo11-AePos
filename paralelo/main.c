@@ -210,7 +210,7 @@ int main (int argc, char **argv){
             stop_timer(tempoA);
 
             total_timer(tempoA);
-                printf("RRR: %.0fms\n", tempoA.timeval_diff);
+                printf("RRR: %.0fms\n", tempoA->timeval_diff);
 
             show_timer(relogio, ct->numProcessos);
 
