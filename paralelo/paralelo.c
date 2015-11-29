@@ -67,14 +67,24 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
         for(t=0; t<ct->numThreads; t++) {
             // LEITURA DAS LINHAS DEFINIDAS
             // PARA CADA THREAD
-            start_timer(tempoR); // INICIA O RELOGIO
+            #pragma omp critical
+            {
+                start_timer(tempoR); // INICIA O RELOGIO
+            }
             getImageThreads(ct, imageParams, thread,  t, numNode);
-            stop_timer(tempoR); // PARA O RELOGIO
-
-            start_timer(tempoS);
+            #pragma omp critical
+            {
+                stop_timer(tempoR); // PARA O RELOGIO
+            }
+            #pragma omp critical
+            {
+                start_timer(tempoS);
+            }
             applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
-            stop_timer(tempoS);
-        }
+            #pragma omp critical
+            {
+                stop_timer(tempoS);
+            }
         #pragma omp barrier
     }
     return thread;

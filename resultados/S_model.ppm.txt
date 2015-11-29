@@ -1,0 +1,8 @@
+S	0	1	0	no	no	707x813	inf	inf	-nan	60.57
+S	0	1	0	no	no	707x813	inf	inf	-nan	63.04
+S	0	1	0	no	no	707x813	inf	inf	-nan	66.09
+S	0	1	0	no	no	707x813	inf	inf	-nan	61.67
+S	0	1	0	no	no	707x813	0.71	105.74	0.00	59.43
+S	0	1	0	no	no	707x813	0.69	107.62	-0.00	60.27
+S	0	1	0	no	no	707x813	0.70	104.55	0.00	58.74
+S	0	1	0	no	no	707x813	0.72	47.55	10.80	59.56
