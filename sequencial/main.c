@@ -33,22 +33,23 @@ int main (int argc, char *argv[]){
         sprintf((char*) &imageParams->fileIn, "%s%s", ct->DIRIMGIN, ct->filePath);
 
         if (ct->filePath != NULL) {
-            timer* tempo; // RELOGIO
+            // RELOGIA PARA CADA NODE
+            tempo* tempos = (tempo* )malloc(sizeof(tempo));
 
             //CARREGA O RELOGIO
-            tempo = start_timer();
+            //start_timer(tempo);
 
             sequencial(imageParams, ct);
 
             //PARA O RELOGIO
-            stop_timer(tempo);
+            //stop_timer(tempoA);
 
             // ESCREVENDO OS RESULTADOS
             // NO ARQUIVO /resultados/
-            writeFile(imageParams, tempo, ct);
+            writeFile(imageParams, tempos, ct);
 
             // LIMPANDO A MEMORIA
-            cleanMemory(imageParams, tempo, ct);
+            cleanMemory(imageParams, tempos, ct);
 
         } else {
             printf("\nOpcao invalida!\n\n");

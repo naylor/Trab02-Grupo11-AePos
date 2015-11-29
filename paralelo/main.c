@@ -34,8 +34,11 @@ int main (int argc, char **argv){
     PPMImageParams* imageParams = (PPMImageParams *)malloc(sizeof(PPMImageParams));
     PPMNode* node = (PPMNode *)malloc(sizeof(PPMNode) * size+1);
 
+    // RELOGIA PARA CADA NODE
+    tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
+
     int completedIndexes[50];
-    int inteiro = 2;
+    int inteiro = 1;
 
     if ( rank == 0 ) {
         //VERIFICANDO SE O ARQUIVO
@@ -81,10 +84,8 @@ int main (int argc, char **argv){
     if (rank == 0) {
         if (ct->filePath != NULL) {
 
-            timer* tempo; // RELOGIO
-
             //CARREGA O RELOGIO
-            tempo = start_timer();
+            start_timer(relogio[rank].tempoA);
 
             int gravar=0;
             int ler=0;
@@ -199,10 +200,11 @@ int main (int argc, char **argv){
             }
             printf("\n");
             //PARA O RELOGIO
-            stop_timer(tempo);
+            stop_timer(relogio[rank].tempoA);
+            show_timer(relogio);
 
             //ESCREVE NO ARQUIVO DE LOGS
-            writeFile(imageParams, tempo, ct);
+            writeFile(imageParams, relogio, ct);
 
             if (ct->debug >= 1) printf("All Server finalizados: %d\n", rank);
 
@@ -253,7 +255,7 @@ int main (int argc, char **argv){
                 //PARA AS THREADS
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
-                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, rank);
+                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, relogio, rank);
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
@@ -272,7 +274,9 @@ int main (int argc, char **argv){
                 if (completedIndexes[rank] == -202) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADO NO DISCO
+                    start_timer(relogio[rank].tempoW); // INICIA O RELOGIO
                     paraleloNodeWrite(ct, imageParams, thread, rank);
+                    stop_timer(relogio[rank].tempoW); // PARA O RELOGIO
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO

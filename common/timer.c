@@ -6,41 +6,31 @@
 
 #include "timer.h"
 
-/*
- * Timer Reference: http://www.cplusplus.com/reference/ctime/
- *
- */
-
-timer* start_timer() {
-	timer* t = malloc(sizeof(timer));
-	gettimeofday(&t->timeval_start, NULL);
-	#ifdef __linux__
-	#endif
-	t->clock_start = clock();
-	return t;
+void start_timer(tempoParams* t) {
+    gettimeofday(&t->timeval_start, NULL);
 }
 
-void stop_timer(timer* t) {
+void stop_timer(tempoParams* t) {
 	gettimeofday(&t->timeval_end, NULL);
-	#ifdef __linux__
-	#endif
-	t->clock_end = clock();
 
 	//timeval diff
-	t->timeval_diff = (t->timeval_end.tv_sec - t->timeval_start.tv_sec) * 1000.0; // sec to ms
-	t->timeval_diff += (t->timeval_end.tv_usec - t->timeval_start.tv_usec) / 1000.0; // us to ms
-	#ifdef __linux__
-	#else
-		t->timespec_diff = 0;
-	#endif
-	//clock diff
-	t->clock_diff = t->clock_end - t->clock_start;
-	t->clock_diff_time = ((float) t->clock_diff / CLOCKS_PER_SEC * 1000.0);
+	t->timeval_diff_s += t->timeval_end.tv_sec - t->timeval_start.tv_sec;
+	t->timeval_diff_u += t->timeval_end.tv_usec - t->timeval_start.tv_usec;
+}
 
-	if (1) {
-		printf("[timeval] %.2fms\n", t->timeval_diff);
-		#ifdef __linux__
-		#endif
-		printf("[clock] %d ticks -> %.2fms\n", (int) t->clock_diff, t->clock_diff_time);
-	}
+void show_timer(tempo* t) {
+	//timeval diff
+    t->tempoA->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoA->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
+    t->tempoR->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoR->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
+    t->tempoS->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoS->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
+    t->tempoW->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoW->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
+
+    printf("[Time Read] %.0fms\n", t->tempoR->timeval_diff);
+    printf("[Time Smooth] %.0fms\n", t->tempoS->timeval_diff);
+    printf("[Time Write] %.0fms\n", t->tempoW->timeval_diff);
+    printf("[Time App] %.0fms\n", t->tempoA->timeval_diff);
 }

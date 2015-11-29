@@ -71,7 +71,7 @@ int in_array(char *array[], int size, void *lookfor)
 }
 
 // LIMPAR MEMORIA
-void cleanMemory(PPMImageParams* imageParams, timer* t, initialParams* ct) {
+void cleanMemory(PPMImageParams* imageParams, tempo* t, initialParams* ct) {
     if(imageParams != NULL)
         free(imageParams);
     if(ct != NULL)
@@ -81,14 +81,7 @@ void cleanMemory(PPMImageParams* imageParams, timer* t, initialParams* ct) {
 }
 
 // FUNCAO PARA GERAR O ARQUIVO DE LOG
-void writeFile(PPMImageParams* imageParams, timer* tempo, initialParams* ct) {
-
-    //date and time as string
-	//time_t rawtime;
-	//time(&rawtime);
-	//struct tm *timeinfo = localtime(&rawtime);
-	//char datetime[100];
-	//strftime((char*) &datetime, 80, "%Y-%m-%d %H:%M:%S", timeinfo);
+void writeFile(PPMImageParams* imageParams, tempo* t, initialParams* ct) {
 
 	//filename
 	char filename[200];
@@ -100,7 +93,7 @@ void writeFile(PPMImageParams* imageParams, timer* tempo, initialParams* ct) {
         printf("\nNao foi possivel gravar o arquivo no diretorio dos resultados: %s\n\n", filename);
 		ct->erro = -101;
 	}
-	fprintf(f, "%c\t%i\t%i\t%i\t%s\t%s\t%ix%i\t%.2f\n",
+	fprintf(f, "%c\t%i\t%i\t%i\t%s\t%s\t%ix%i\t%.2f\t%.2f\t%.2f\t%.2f\n",
         ct->typeAlg,
 		ct->numProcessos,
 		ct->numThreads,
@@ -109,8 +102,10 @@ void writeFile(PPMImageParams* imageParams, timer* tempo, initialParams* ct) {
         ct->cargaAleatoria?"yes":"no",
         imageParams->linha,
         imageParams->coluna,
-		//datetime,
-		tempo->timeval_diff);
+		t->tempoR->timeval_diff,
+		t->tempoS->timeval_diff,
+		t->tempoW->timeval_diff,
+		t->tempoA->timeval_diff);
 
 	fclose(f);
 }

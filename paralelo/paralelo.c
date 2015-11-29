@@ -50,7 +50,7 @@ PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParam
     return imageParams;
 }
 
-PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, int numNode) {
+PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imageParams, PPMNode* node, tempo* relogio, int numNode) {
 
     PPMThread* thread;
     // FAZ A DIVISAO DAS LINHAS RECEBIDAS
@@ -60,15 +60,19 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
 
     // ESSA PARTE FOI PARALELIZADA
     // CADA THREAD APLICA O SMOOTH
-    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, thread, numNode)
+    #pragma omp parallel num_threads(ct->numThreads) shared(t, ct, imageParams, relogio, thread, numNode)
     {
         #pragma omp for
         for(t=0; t<ct->numThreads; t++) {
             // LEITURA DAS LINHAS DEFINIDAS
             // PARA CADA THREAD
+            start_timer(relogio[numNode].tempoR); // INICIA O RELOGIO
             getImageThreads(ct, imageParams, thread,  t, numNode);
+            stop_timer(relogio[numNode].tempoR); // PARA O RELOGIO
 
+            start_timer(relogio[numNode].tempoS);
             applySmooth(ct, imageParams, thread, t, numNode); // APLICA O SMOOTH PARA CADA THREAD
+            stop_timer(relogio[numNode].tempoR);
         }
         #pragma omp barrier
     }
