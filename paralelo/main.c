@@ -204,11 +204,11 @@ int main (int argc, char **argv){
             }
             printf("\n");
             //PARA O RELOGIO
-            //stop_timer(relogio[rank].tempoA);
-            //show_timer(relogio);
+            stop_timer(relogio[rank].tempoA);
+            show_timer(relogio);
 
             //ESCREVE NO ARQUIVO DE LOGS
-            //writeFile(imageParams, relogio, ct);
+            writeFile(imageParams, relogio, ct);
 
             if (ct->debug >= 1) printf("All Server finalizados: %d\n", rank);
 
@@ -278,9 +278,9 @@ int main (int argc, char **argv){
                 if (completedIndexes[rank] == -202) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADO NO DISCO
-                    //start_timer(relogio[rank].tempoW); // INICIA O RELOGIO
+                    start_timer(relogio[rank].tempoW); // INICIA O RELOGIO
                     paraleloNodeWrite(ct, imageParams, thread, rank);
-                    //stop_timer(relogio[rank].tempoW); // PARA O RELOGIO
+                    stop_timer(relogio[rank].tempoW); // PARA O RELOGIO
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
