@@ -18,10 +18,12 @@ void stop_timer(timer* t) {
 	t->timeval_diff_u += t->timeval_end.tv_usec - t->timeval_start.tv_usec;
 }
 
-void total_timer(timer* t) {
+void total_timer(tempo* te, int numNode, timer* t) {
 	//timeval diff
     t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
     t->timeval_diff += t->timeval_diff_u / 1000.0; // us to ms
+
+    te[numNode].tempoA = scanf ("%.0fms",&t->timeval_diff);
 }
 
 void show_timer(tempo* t, int numNodes) {
@@ -31,10 +33,16 @@ void show_timer(tempo* t, int numNodes) {
     double tempoW=0;
     double tempoA=0;
     int i;
+    for(i=0; i <= numNodes; i++) {
+        tempoR += t[i].tempoR;
+        tempoS += t[i].tempoS;
+        tempoW += t[i].tempoW;
+        tempoA += t[i].tempoA;
+    }
 
 	//timeval diff
     printf("[Time Read] %.0fms\n", tempoR);
     printf("[Time Smooth] %.0fms\n", tempoS);
     printf("[Time Write] %.0fms\n", tempoW);
-    printf("[Time App] %.0fms\n", t[0].tempoA);
+    printf("[Time App] %.0fms\n", tempoA);
 }

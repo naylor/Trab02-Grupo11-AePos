@@ -36,8 +36,6 @@ int main (int argc, char **argv){
 
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
-    timer* tempoA = (timer *)malloc(sizeof(timer));
-
 
     int completedIndexes[50];
     int inteiro = 2;
@@ -87,6 +85,7 @@ int main (int argc, char **argv){
         if (ct->filePath != NULL) {
 
             //CARREGA O RELOGIO
+            timer* tempoA = (timer *)malloc(sizeof(timer));
             start_timer(tempoA);
 
             int gravar=0;
@@ -225,9 +224,9 @@ int main (int argc, char **argv){
     //FIM RANK 0
     } else {
     //INICIO DOS NODES
-    timer* tempoR = (timer *)malloc(sizeof(timer));
-    timer* tempoS = (timer *)malloc(sizeof(timer));
-    timer* tempoW = (timer *)malloc(sizeof(timer));
+        timer* tempoR = (timer *)malloc(sizeof(timer));
+        timer* tempoS = (timer *)malloc(sizeof(timer));
+        timer* tempoW = (timer *)malloc(sizeof(timer));
         char hostname[255];
         gethostname(hostname,255);
         int stop = 0;
@@ -291,13 +290,13 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
+                    total_timer(tempoR);
+                    total_timer(tempoS);
                     total_timer(tempoW);
 
-                printf("RRR: %.2fms\n", tempoW->timeval_diff);
-
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_DOUBLE, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoS, 1, MPI_DOUBLE, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_DOUBLE, 0, 17, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
