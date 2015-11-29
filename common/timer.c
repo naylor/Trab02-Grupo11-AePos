@@ -18,10 +18,16 @@ void stop_timer(tempoParams* t) {
 	t->timeval_diff_u += t->timeval_end.tv_usec - t->timeval_start.tv_usec;
 }
 
-void total_timer(tempoParams* t) {
+void total_timer(tempo* t, int numNode) {
 	//timeval diff
-    t->timeval_diff = t->timeval_diff_s * 1000.0; // sec to ms
-    t->total += t->timeval_diff_u / 1000.0; // us to ms
+    t[numNode].tempoA->timeval_diff = t[numNode].tempoA->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoA->total += t[numNode].tempoA->timeval_diff_u / 1000.0; // us to ms
+    t[numNode].tempoR->timeval_diff = t[numNode].tempoR->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoR->total += t[numNode].tempoR->timeval_diff_u / 1000.0; // us to ms
+    t[numNode].tempoS->timeval_diff = t[numNode].tempoS->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoS->total += t[numNode].tempoS->timeval_diff_u / 1000.0; // us to ms
+    t[numNode].tempoW->timeval_diff = t[numNode].tempoW->timeval_diff_s * 1000.0; // sec to ms
+    t[numNode].tempoW->total += t[numNode].tempoW->timeval_diff_u / 1000.0; // us to ms
 }
 
 void show_timer(tempo* t, int numNodes) {
