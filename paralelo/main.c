@@ -206,7 +206,7 @@ int main (int argc, char **argv){
             //PARA O RELOGIO
             stop_timer(tempoA);
 
-            total_timer(tempoA);
+            total_timer(relogio, rank, tempoA);
                 printf("RRR: %.0fms\n", tempoA->timeval_diff);
 
             show_timer(relogio, ct->numProcessos);
@@ -290,9 +290,9 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-                    total_timer(tempoR);
-                    total_timer(tempoS);
-                    total_timer(tempoW);
+                    total_timer(relogio, rank, tempoR);
+                    total_timer(relogio, rank, tempoS);
+                    total_timer(relogio, rank, tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
