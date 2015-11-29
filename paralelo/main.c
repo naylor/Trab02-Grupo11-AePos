@@ -37,7 +37,7 @@ int main (int argc, char **argv){
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
-    char[1] completedIndexes='I';
+    char completedIndexes='I';
     int inteiro = 2;
 
     if ( rank == 0 ) {

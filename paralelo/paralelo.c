@@ -85,7 +85,7 @@ PPMThread* paraleloNodeReadAndSmooth(initialParams* ct, PPMImageParams* imagePar
             {
                 stop_timer(tempoS);
             }
-                printf("[Time Smooth] %.2fms\n", total_timer(tempoS)tempoS);
+            printf("[Time Smooth] %.2fms\n", total_timer(tempoS));
 
         }
         #pragma omp barrier
