@@ -8,19 +8,18 @@
 typedef struct {
     struct timeval timeval_start, timeval_end;
     double timeval_diff, timeval_diff_s, timeval_diff_u;
-    float total;
-} tempoParams;
+} timer;
 
 typedef struct {
-    tempoParams* tempoA; // TEMPO DA APLICACAO
-    tempoParams* tempoR; // TEMPO DA LEITURA
-    tempoParams* tempoW; // TEMPO DA GRAVACAO
-    tempoParams* tempoS; // TEMPO DO FILTRO
+    float tempoA; // TEMPO DA APLICACAO
+    float tempoR; // TEMPO DA LEITURA
+    float tempoW; // TEMPO DA GRAVACAO
+    float tempoS; // TEMPO DO FILTRO
 } tempo;
 
-void start_timer(tempoParams* t);
-void stop_timer(tempoParams* t);
-void total_timer(tempo* t, int numNode);
+void start_timer(timer* t);
+void stop_timer(timer* t);
+void total_timer(tempo* t, timer* a, timer* r, timer* s, timer* w, int numNode);
 void show_timer(tempo* t, int numNodes);
 
 #endif

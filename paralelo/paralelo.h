@@ -5,6 +5,7 @@
 
 PPMImageParams* paraleloInitParams(initialParams* ct, PPMImageParams* imageParams);
 int paraleloNodeWrite(initialParams* ct, PPMImageParams* imageParams, PPMThread* thread, int numNode);
-PPMThread* paraleloNodeReadAndSmooth(initialParams* ct,  PPMImageParams* imageParams, PPMNode* node, tempo* relogio, int numNode);
+PPMThread* paraleloNodeReadAndSmooth(initialParams* ct,  PPMImageParams* imageParams,
+                                     PPMNode* node, timer* tempoS, timer* tempoR, int numNode);
 
 #endif // PARALELO_H_INCLUDED
