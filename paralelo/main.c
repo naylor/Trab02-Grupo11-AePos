@@ -280,7 +280,7 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
                     total_timer(relogio, tempoA, tempoR, tempoS, tempoW, rank);
 
-                printf("RRR: %.0fms\n", relogio[rank].tempoW);
+                printf("RRR: %.0fms\n", tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_DOUBLE, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_DOUBLE, 0, 16, MPI_COMM_WORLD);
