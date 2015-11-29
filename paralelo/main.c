@@ -280,7 +280,6 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
                     total_timer(relogio, tempoA, tempoR, tempoS, tempoW, rank);
 
-                printf("RRR: %d\n", relogio[rank].tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_DOUBLE, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_DOUBLE, 0, 16, MPI_COMM_WORLD);
@@ -297,6 +296,7 @@ int main (int argc, char **argv){
     MPI_Barrier(MPI_COMM_WORLD);
 
     if (rank == 0) {
+                printf("RRR: %d\n", relogio[1].tempoW);
 
         //PARA O RELOGIO
         stop_timer(tempoA);
