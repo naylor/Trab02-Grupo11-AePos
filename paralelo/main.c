@@ -81,11 +81,13 @@ int main (int argc, char **argv){
     MPI_Bcast ( &ct->numThreads, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &ct->debug, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
 
+    relogiorelogio[rank] = (tempoParams* )malloc(sizeof(tempoParams));
+
     if (rank == 0) {
         if (ct->filePath != NULL) {
 
             //CARREGA O RELOGIO
-            //start_timer(relogio[rank].tempoA);
+            start_timer(relogio[rank].tempoA);
 
             int gravar=0;
             int ler=0;
