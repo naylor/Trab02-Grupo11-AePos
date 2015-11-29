@@ -291,9 +291,11 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-                                        printf("[Time Read] %d ms\n", tempoS->timeval_diff);
 
-                    total_timer(relogio, rank, tempoR);
+                    relogio[rank].tempoR = total_timer(tempoR);
+
+                    printf("[Time Read] %d ms\n", relogio[rank].tempoR);
+
                     total_timer(relogio, rank, tempoS);
                     total_timer(relogio, rank, tempoW);
 
