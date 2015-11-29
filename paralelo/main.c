@@ -208,7 +208,7 @@ int main (int argc, char **argv){
 
             total_timer(relogio, rank, tempoA);
 
-            printf("[Time Read] %.0fms\n", relogio[1].tempoS);
+            printf("[Time Read] %f ms\n", relogio[1].tempoS);
 
             show_timer(relogio, ct->numProcessos);
 
