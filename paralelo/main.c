@@ -36,6 +36,10 @@ int main (int argc, char **argv){
 
     // RELOGIA PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
+    relogio[rank].tempoA = (tempoParams *)malloc(sizeof(tempoParams));
+    relogio[rank].tempoR = (tempoParams *)malloc(sizeof(tempoParams));
+    relogio[rank].tempoS = (tempoParams *)malloc(sizeof(tempoParams));
+    relogio[rank].tempoW = (tempoParams *)malloc(sizeof(tempoParams));
 
     int completedIndexes[50];
     int inteiro = 2;
@@ -80,8 +84,6 @@ int main (int argc, char **argv){
     MPI_Bcast ( &imageParams->fileOut, 200, MPI_CHAR, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &ct->numThreads, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
     MPI_Bcast ( &ct->debug, inteiro, MPI_INT, 0, MPI_COMM_WORLD );
-
-    relogio[rank].tempoA = (tempoParams *)malloc(sizeof(tempoParams));
 
     if (rank == 0) {
         if (ct->filePath != NULL) {
