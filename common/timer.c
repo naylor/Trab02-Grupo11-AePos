@@ -22,12 +22,12 @@ void show_timer(tempo* t) {
 	//timeval diff
     t->tempoA->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
     t->tempoA->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
-    t->tempoR->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
-    t->tempoR->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
-    t->tempoS->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
-    t->tempoS->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
-    t->tempoW->timeval_diff = t->tempoA->timeval_diff_s * 1000.0; // sec to ms
-    t->tempoW->timeval_diff += t->tempoA->timeval_diff_u / 1000.0; // us to ms
+    t->tempoR->timeval_diff = t->tempoR->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoR->timeval_diff += t->tempoR->timeval_diff_u / 1000.0; // us to ms
+    t->tempoS->timeval_diff = t->tempoS->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoS->timeval_diff += t->tempoS->timeval_diff_u / 1000.0; // us to ms
+    t->tempoW->timeval_diff = t->tempoW->timeval_diff_s * 1000.0; // sec to ms
+    t->tempoW->timeval_diff += t->tempoW->timeval_diff_u / 1000.0; // us to ms
 
     printf("[Time Read] %.0fms\n", t->tempoR->timeval_diff);
     printf("[Time Smooth] %.0fms\n", t->tempoS->timeval_diff);
