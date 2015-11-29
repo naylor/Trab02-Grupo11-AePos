@@ -291,9 +291,9 @@ int main (int argc, char **argv){
 
                     //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-                    total_timer(tempoW);
+                    total_timer(tempoS);
 
-                printf("RRR: %.0fms\n", tempoW->timeval_diff);
+                printf("RRR: %.0fms\n", tempoS->timeval_diff);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_DOUBLE, 0, 15, MPI_COMM_WORLD);
                     MPI_Ssend(&relogio[rank].tempoS, 1, MPI_DOUBLE, 0, 16, MPI_COMM_WORLD);
