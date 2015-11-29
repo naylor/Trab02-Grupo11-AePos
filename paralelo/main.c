@@ -264,13 +264,7 @@ int main (int argc, char **argv){
                 //PARA AS THREADS
                 //EXECUTA A LEITURA DO BLOCO DA IMAGEM
                 //APLICA SMOOTH
-
-                start_timer(tempoF); // INICIA O RELOGIO
-                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, rank);
-                    stop_timer(tempoF); // PARA O RELOGIO
-                    relogio[rank].tempoF = total_timer(tempoF);
-
-                printf("%d F %f \n", rank, relogio[rank].tempoF);
+                thread = paraleloNodeReadAndSmooth(ct, imageParams, node, tempoR, tempoF, rank);
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
@@ -297,6 +291,7 @@ int main (int argc, char **argv){
                     //E AGUARDO POR MAIS TRABALHO
 
                     relogio[rank].tempoR = total_timer(tempoR);
+                    relogio[rank].tempoF = total_timer(tempoF);
                     relogio[rank].tempoW = total_timer(tempoW);
 
                     MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
