@@ -27,7 +27,7 @@ int main (int argc, char **argv){
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
-    printf("PRO %d %d\n", provided, MPI_THREAD_MULTIPLE );
+    printf("PRO %d %d\n", provided, MPI_THREAD_SERIALIZED );
 
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
