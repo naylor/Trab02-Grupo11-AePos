@@ -162,9 +162,7 @@ int main (int argc, char **argv){
                                         MPI_Isend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &request[i]);
                                         MPI_Wait(&request[i], &status);
                                         gravado = 1;
-                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 06, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
@@ -198,6 +196,10 @@ int main (int argc, char **argv){
                             if (ct->debug >= 1) printf("Server[%d] informado que o node acabou o trabalho: %d\n", tServer, i);
                             node[i].li = -101;
                             MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+
+                            MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
+                            MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                            MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                             fim=1;
                         }
                     }
@@ -245,6 +247,13 @@ int main (int argc, char **argv){
             //ENTRA AQUI CASO NAO HA MAIS TRABALHO
             if (node[rank].li == -101) {
                 if (ct->debug >= 1) printf("Node nao tem mais trabalho: %d - %s\n", rank, hostname);
+                    relogio[rank].tempoR = total_timer(tempoR);
+                    relogio[rank].tempoF = total_timer(tempoF);
+                    relogio[rank].tempoW = total_timer(tempoW);
+
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                 stop=1;
             } else {
                 //SENAO, CONTINUA RECEBENDO OS DADOS
@@ -296,16 +305,9 @@ int main (int argc, char **argv){
                     paraleloNodeWrite(ct, imageParams, thread, rank);
                     stop_timer(tempoW); // PARA O RELOGIO
 
-                    //INFORMA O NODE QUE ACABOU
+                    //INFORMA O SERVER QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-
-                    relogio[rank].tempoR = total_timer(tempoR);
-                    relogio[rank].tempoF = total_timer(tempoF);
-                    relogio[rank].tempoW = total_timer(tempoW);
-
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 06, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
