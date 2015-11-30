@@ -296,7 +296,7 @@ int main (int argc, char **argv){
 
                     //MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
                     //MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&ompletedIndexes[rank], inteiro, MPI_INT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes[rank], inteiro, MPI_INT, 0, 15, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
