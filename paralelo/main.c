@@ -27,15 +27,9 @@ int main (int argc, char **argv){
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
+
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    if (provided != MPI_THREAD_MULTIPLE)
-    {
-        printf("Sorry, this MPI implementation does not support multiple threads\n");
-        ct->erro = -101;
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
 
     PPMImageParams* imageParams = (PPMImageParams *)malloc(sizeof(PPMImageParams));
     PPMNode* node = (PPMNode *)malloc(sizeof(PPMNode) * size+1);
@@ -43,7 +37,7 @@ int main (int argc, char **argv){
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
-    char completedIndexes='I';
+    int completedIndexes[size+1];
     int inteiro = 2;
 
     if ( rank == 0 ) {
@@ -73,7 +67,6 @@ int main (int argc, char **argv){
             }
             ct->numProcessos = 0;
         }
-        exit(0);
     }
 
     //ENVIANDO AS CONFIGURACOES BASICAS PARA
@@ -106,7 +99,7 @@ int main (int argc, char **argv){
             //FOI TESTADO DISPUTA EM DISCO COM FWRITE E FWRITE_UNLOCKED
             //POREM OS RESULTADOS NAO FORAM BONS, HA FALHAS DE GRAVACAO
             //POR CONCORRENCIA.
-            #pragma omp parallel num_threads(2) shared(gravar, ler, relogio)
+            #pragma omp parallel num_threads(ct->numProcessos) shared(gravar, ler, relogio)
             {
                 int i;
                 //ABRE UMA THREAD PARA CADA PROCESSO
@@ -206,7 +199,7 @@ int main (int argc, char **argv){
                     }
                     if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
                 }
-                //#pragma omp barrier
+                #pragma omp barrier
             }
             printf("\n");
 
