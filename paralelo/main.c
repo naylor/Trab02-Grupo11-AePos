@@ -168,51 +168,28 @@ int main (int argc, char **argv){
                                 }
 
                             if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
+                            int gravado = 0;
                             //QUANDO O PROCESSO FINALIZAR
                             //TENTA GRAVAR OS DADOS NO DISCO
                             //SE CONSEGUIR ENTRAR NA REGIAO CRITICA
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
-                            int podeGravar = 0;
-                            while (podeGravar == 0) {
+                            while (gravado == 0) {
                                 #pragma omp critical
                                 {
                                     if (gravar == 0) {
-                                        podeGravar = 1;
                                         gravar = 1;
+                                        completedIndexes = 'W';
+                                        if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
+                                        MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
+                                        gravado = 1;
+                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
+                                        if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
+                                        gravar=0;
                                     }
                                 }
-                                sleep(1);
-                            }
-                            if (podeGravar == 1) {
-                                #pragma omp critical
-                                {
-                                    completedIndexes = 'W';
-                                    if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
-                                    MPI_Isend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD, &requestNull);
-                                }
-                            }
-
-                            int check_receive1 = 0;
-                            int check_receive2 = 0;
-                            int check_receive3 = 0;
-                            while (check_receive1 == 0 || check_receive2 == 0 || check_receive3 == 0) {
-                                #pragma omp critical
-                                {
-                                    MPI_Iprobe(i, 15, MPI_COMM_WORLD, &check_receive1, &status);
-                                    MPI_Iprobe(i, 16, MPI_COMM_WORLD, &check_receive2, &status);
-                                    MPI_Iprobe(i, 17, MPI_COMM_WORLD, &check_receive3, &status);
-                                }
-                            }
-                            if (check_receive1 == 1 && check_receive2 == 1 && check_receive3 == 1) {
-                                #pragma omp critical
-                                {
-                                    MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                                    MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
-                                    MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
-                                    gravar=0;
-                                }
-                                if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                             }
                         }
                         //CHAMA A FUNCAO getDivisionNodes
