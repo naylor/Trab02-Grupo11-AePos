@@ -33,7 +33,7 @@ int main (int argc, char **argv){
     if (provided != MPI_THREAD_MULTIPLE)
     {
         printf("Sorry, this MPI implementation does not support multiple threads\n");
-        ct->erro == -101;
+        ct->erro = -101;
     }
     MPI_Barrier(MPI_COMM_WORLD);
 
