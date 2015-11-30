@@ -119,7 +119,7 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                #pragma omp critical
+                                #pragma omp master
                                 {
                                     MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
                                 }
@@ -145,7 +145,7 @@ int main (int argc, char **argv){
                             }
 
                             if (ct->debug >= 1) printf("Server[%d] esperando node aplicar smooth: %d\n", tServer, i);
-                            #pragma omp critical
+                            #pragma omp master
                             {
                                 MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
                             }
@@ -190,7 +190,7 @@ int main (int argc, char **argv){
                         }
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
-                            #pragma omp critical
+                            #pragma omp master
                             {
                                 MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
                                 MPI_Ssend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
@@ -203,7 +203,7 @@ int main (int argc, char **argv){
                             //SENAO, CONTINUA COM OUTRO BLOCO
                             if (ct->debug >= 1) printf("Server[%d] informado que o node acabou o trabalho: %d\n", tServer, i);
                             node[i].li = -101;
-                            #pragma omp critical
+                            #pragma omp master
                             {
                                 MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
                             }
