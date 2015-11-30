@@ -187,7 +187,7 @@ int main (int argc, char **argv){
                         }
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
-                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, );
+                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
                             MPI_Ssend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
                             primeiro = 1;
                             if (ct->debug >= 1) printf("Server[%d] enviando trabalho(carga: %d) para o node: %d\n", tServer, maxLinhasRand, i);
