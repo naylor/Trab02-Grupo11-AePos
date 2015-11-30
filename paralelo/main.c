@@ -151,8 +151,8 @@ int main (int argc, char **argv){
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
                             while (gravado == 0) {
-                                #pragma omp critical
-                                {
+                                //#pragma omp critical
+                                //{
                                     if (gravar == 0) {
                                         gravar = 1;
                                         completedIndexes[i] = 3;
@@ -164,7 +164,7 @@ int main (int argc, char **argv){
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
-                                }
+                                //}
                             }
                         }
                         //CHAMA A FUNCAO getDivisionNodes
