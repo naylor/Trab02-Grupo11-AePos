@@ -142,9 +142,8 @@ int main (int argc, char **argv){
                             }
 
                             if (ct->debug >= 1) printf("Server[%d] esperando node aplicar smooth: %d\n", tServer, i);
-                            completedIndexes[i] = 1;
                             MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 11, MPI_COMM_WORLD, &status);
-                            if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
+                            if (ct->debug >= 1) printf("Server[%d] recebe mensagem(%d) do node solicitando gravar: %d\n", tServer, completedIndexes[i], i);
                             int gravado = 0;
                             //QUANDO O PROCESSO FINALIZAR
                             //TENTA GRAVAR OS DADOS NO DISCO
