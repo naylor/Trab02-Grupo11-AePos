@@ -131,6 +131,7 @@ int main (int argc, char **argv){
                                     {
                                         MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 10, MPI_COMM_WORLD, &status);
                                     }
+
                                 if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando ler: %d\n", tServer, i);
                                 int lido = 0;
 
@@ -153,10 +154,19 @@ int main (int argc, char **argv){
                             }
 
                             if (ct->debug >= 1) printf("Server[%d] esperando node aplicar smooth: %d\n", tServer, i);
-                            #pragma omp critical
-                            {
-                                MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                            int check_receive = 0;
+                            while (check_receive == 0) {
+                                #pragma omp critical
+                                {
+                                    MPI_Iprobe(i, 11, MPI_COMM_WORLD, &check_receive, &status);
+                                }
                             }
+                            if (check_receive == 1)
+                                #pragma omp critical
+                                {
+                                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                                }
+
                             if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
                             int gravado = 0;
                             //QUANDO O PROCESSO FINALIZAR
