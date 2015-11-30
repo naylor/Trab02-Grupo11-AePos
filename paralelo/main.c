@@ -39,6 +39,7 @@ int main (int argc, char **argv){
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
     char completedIndexes='I';
+    int flag[size];
     int inteiro = 2;
 
     if ( rank == 0 ) {
@@ -119,10 +120,18 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                #pragma omp critical
-                                {
-                                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
+                                int check_receive = 0;
+                                while (check_receive = 0) {
+                                    #pragma omp critical
+                                    {
+                                        MPI_Iprobe(i, &flag[i], MPI_COMM_WORLD, 10, &status)
+                                    }
                                 }
+                                if (flag[i] == 1)
+                                    #pragma omp critical
+                                    {
+                                        MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 10, MPI_COMM_WORLD, &status);
+                                    }
                                 if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando ler: %d\n", tServer, i);
                                 int lido = 0;
 
@@ -281,7 +290,7 @@ int main (int argc, char **argv){
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
-                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 10, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a leitura: %d - %s\n", rank, hostname);
                 }
 
