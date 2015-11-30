@@ -200,7 +200,7 @@ int main (int argc, char **argv){
                     }
                     if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
                 }
-                #pragma omp barrier
+                //#pragma omp barrier
             }
             printf("\n");
 
