@@ -124,8 +124,8 @@ int main (int argc, char **argv){
 
                                 //PROCESSO TER PERMISSAO DE LER
                                 while (lido == 0) {
-                                    #pragma omp critical
-                                    {
+                                    //#pragma omp critical
+                                    //{
                                         if (ler == 0) {
                                             ler = 1;
                                             completedIndexes = 'R';
@@ -136,7 +136,7 @@ int main (int argc, char **argv){
                                             if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de leitura: %d\n", tServer, i);
                                             ler=0;
                                         }
-                                    }
+                                    //}
                                 }
                             }
 
@@ -150,8 +150,8 @@ int main (int argc, char **argv){
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
                             while (gravado == 0) {
-                                #pragma omp critical
-                                {
+                                //#pragma omp critical
+                                //{
                                     if (gravar == 0) {
                                         gravar = 1;
                                         completedIndexes = 'W';
@@ -164,7 +164,7 @@ int main (int argc, char **argv){
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
-                                }
+                               // }
                             }
                         }
                         //CHAMA A FUNCAO getDivisionNodes
@@ -177,10 +177,10 @@ int main (int argc, char **argv){
                         else
                             maxLinhasRand = ct->numMaxLinhas;
 
-                        #pragma omp critical
-                        {
+                        //#pragma omp critical
+                        //{
                             blocks = getDivisionNodes(ct, imageParams, node, 1, i, maxLinhasRand);
-                        }
+                        //}
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
                             MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
@@ -199,7 +199,7 @@ int main (int argc, char **argv){
                     }
                     if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
                 }
-                #pragma omp barrier
+                //#pragma omp barrier
             }
             printf("\n");
 
