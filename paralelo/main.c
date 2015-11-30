@@ -24,6 +24,7 @@ int main (int argc, char **argv){
 
     //INICIANDO MPI
     MPI_Status status;
+    MPI_Request request;
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
@@ -157,7 +158,8 @@ int main (int argc, char **argv){
                                         gravar = 1;
                                         completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
-                                        MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
+                                        MPI_Isend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &request[i]);
+                                        MPI_Wait(&request[i], &status[0]);
                                         gravado = 1;
                                         MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
                                         MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
@@ -184,7 +186,7 @@ int main (int argc, char **argv){
                         }
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
-                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, );
                             MPI_Ssend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
                             primeiro = 1;
                             if (ct->debug >= 1) printf("Server[%d] enviando trabalho(carga: %d) para o node: %d\n", tServer, maxLinhasRand, i);
@@ -283,7 +285,8 @@ int main (int argc, char **argv){
 
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
-                MPI_Recv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
+                MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status, &request[rank]);
+                MPI_Wait(&request[rank], &status[0]);
                 if (completedIndexes[rank] == 3) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADA NO DISCO
