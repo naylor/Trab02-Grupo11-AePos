@@ -119,7 +119,7 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                int check_receive = 0;
+                                int *check_receive = 0;
                                 while (check_receive == 0) {
                                     #pragma omp critical
                                     {
