@@ -39,7 +39,6 @@ int main (int argc, char **argv){
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
     char completedIndexes='I';
-    int flag[size];
     int inteiro = 2;
 
     if ( rank == 0 ) {
@@ -124,10 +123,10 @@ int main (int argc, char **argv){
                                 while (check_receive == 0) {
                                     #pragma omp critical
                                     {
-                                        MPI_Iprobe(i, &flag[i], MPI_COMM_WORLD, 10, &status);
+                                        MPI_Iprobe(i, &check_receive, MPI_COMM_WORLD, 10, &status);
                                     }
                                 }
-                                if (flag[i] == 1)
+                                if (check_receive == 1)
                                     #pragma omp critical
                                     {
                                         MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 10, MPI_COMM_WORLD, &status);
