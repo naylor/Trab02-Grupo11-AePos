@@ -158,6 +158,7 @@ int main (int argc, char **argv){
                                         gravar = 1;
                                         completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
+
                                         MPI_Isend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &request[i]);
                                         MPI_Wait(&request[i], &status[0]);
                                         gravado = 1;
@@ -285,6 +286,7 @@ int main (int argc, char **argv){
 
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
+
                 MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status, &request[rank]);
                 MPI_Wait(&request[rank], &status[0]);
                 if (completedIndexes[rank] == 3) {
