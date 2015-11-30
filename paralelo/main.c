@@ -37,7 +37,7 @@ int main (int argc, char **argv){
     // RELOGIO PARA CADA NODE
     tempo* relogio = (tempo* )malloc(sizeof(tempo) * size+1);
 
-    int completedIndexes[size+1];
+    char completedIndexes='I';
     int inteiro = 2;
 
     if ( rank == 0 ) {
@@ -99,7 +99,7 @@ int main (int argc, char **argv){
             //FOI TESTADO DISPUTA EM DISCO COM FWRITE E FWRITE_UNLOCKED
             //POREM OS RESULTADOS NAO FORAM BONS, HA FALHAS DE GRAVACAO
             //POR CONCORRENCIA.
-            #pragma omp parallel num_threads(2) shared(gravar, ler, relogio)
+            #pragma omp parallel num_threads(1) shared(gravar, ler, relogio)
             {
                 int i;
                 //ABRE UMA THREAD PARA CADA PROCESSO
@@ -118,8 +118,7 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                completedIndexes[i] = 1;
-                                MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 13, MPI_COMM_WORLD, &status);
+                                MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
                                 if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando ler: %d\n", tServer, i);
                                 int lido = 0;
 
@@ -129,11 +128,11 @@ int main (int argc, char **argv){
                                     {
                                         if (ler == 0) {
                                             ler = 1;
-                                            completedIndexes[i] = 2;
+                                            completedIndexes = 'R';
                                             if (ct->debug >= 1) printf("Server[%d] permite node ler: %d\n", tServer, i);
-                                            MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
+                                            MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
                                             lido = 1;
-                                            MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 13, MPI_COMM_WORLD, &status);
+                                            MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
                                             if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de leitura: %d\n", tServer, i);
                                             ler=0;
                                         }
@@ -142,31 +141,32 @@ int main (int argc, char **argv){
                             }
 
                             if (ct->debug >= 1) printf("Server[%d] esperando node aplicar smooth: %d\n", tServer, i);
-                            MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 11, MPI_COMM_WORLD, &status);
-                            if (ct->debug >= 1) printf("Server[%d] recebe mensagem(%d) do node solicitando gravar: %d\n", tServer, completedIndexes[i], i);
+                            MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                            if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
                             int gravado = 0;
                             //QUANDO O PROCESSO FINALIZAR
                             //TENTA GRAVAR OS DADOS NO DISCO
                             //SE CONSEGUIR ENTRAR NA REGIAO CRITICA
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
-                            //while (gravado == 0) {
-                                //#pragma omp critical
-                                //{
-                                    //if (gravar == 0) {
+                            while (gravado == 0) {
+                                #pragma omp critical
+                                {
+                                    if (gravar == 0) {
                                         gravar = 1;
-                                        completedIndexes[i] = 3;
+                                        completedIndexes = 'W';
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
-
-                                        MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
+                                        MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
-                                        MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 06, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
-                                    //}
-                                //}
+                                    }
+                                }
                             }
-                        //}
+                        }
                         //CHAMA A FUNCAO getDivisionNodes
                         //ELA FORNECE PARA OS PROCESSOS A DIVISAO
                         //DE TRABALHO DE CADA UM DE ACORDO COM O NUMERO
@@ -194,10 +194,6 @@ int main (int argc, char **argv){
                             if (ct->debug >= 1) printf("Server[%d] informado que o node acabou o trabalho: %d\n", tServer, i);
                             node[i].li = -101;
                             MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
-
-                            MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                            MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
-                            MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                             fim=1;
                         }
                     }
@@ -245,13 +241,6 @@ int main (int argc, char **argv){
             //ENTRA AQUI CASO NAO HA MAIS TRABALHO
             if (node[rank].li == -101) {
                 if (ct->debug >= 1) printf("Node nao tem mais trabalho: %d - %s\n", rank, hostname);
-                    relogio[rank].tempoR = total_timer(tempoR);
-                    relogio[rank].tempoF = total_timer(tempoF);
-                    relogio[rank].tempoW = total_timer(tempoW);
-
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                 stop=1;
             } else {
                 //SENAO, CONTINUA RECEBENDO OS DADOS
@@ -261,14 +250,13 @@ int main (int argc, char **argv){
                 PPMThread* thread;
 
                 if (ct->leituraIndividual == 1) {
-                    completedIndexes[rank] = 1;
                     if (ct->debug >= 1) printf("Node solicita entrada na fila de leitura: %d\n", rank);
-                    MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 13, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
 
                     //AGUARDA AUTORIZACAO DO RANK 0
                     //PARA LER
-                    MPI_Recv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
-                    if (completedIndexes[rank] == 2)
+                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 05, MPI_COMM_WORLD, &status);
+                    if (completedIndexes == 'R')
                         if (ct->debug >= 1) printf("Node tem permissao para ler: %d - %s\n", rank, hostname);
                 }
 
@@ -280,31 +268,35 @@ int main (int argc, char **argv){
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
-                    completedIndexes[rank] = 1;
-                    MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 13, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a leitura: %d - %s\n", rank, hostname);
                 }
 
                 //INFORMA O RANK 0 QUE FINALIZOU
                 //E ESTA PRONTO PARA GRAVAR
                 if (ct->debug >= 1) printf("Node solicita entrada na fila de gravacao: %d\n", rank);
-                completedIndexes[rank] = 1;
-                MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 11, MPI_COMM_WORLD);
+                MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 11, MPI_COMM_WORLD);
 
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
-
-                MPI_Recv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
-                if (completedIndexes[rank] == 3) {
+                MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 05, MPI_COMM_WORLD, &status);
+                if (completedIndexes == 'W') {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADA NO DISCO
                     start_timer(tempoW); // INICIA O RELOGIO
                     paraleloNodeWrite(ct, imageParams, thread, rank);
                     stop_timer(tempoW); // PARA O RELOGIO
 
-                    //INFORMA O SERVER QUE ACABOU
+                    //INFORMA O NODE QUE ACABOU
                     //E AGUARDO POR MAIS TRABALHO
-                    MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 06, MPI_COMM_WORLD);
+
+                    relogio[rank].tempoR = total_timer(tempoR);
+                    relogio[rank].tempoF = total_timer(tempoF);
+                    relogio[rank].tempoW = total_timer(tempoW);
+
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
