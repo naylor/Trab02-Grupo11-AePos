@@ -33,8 +33,9 @@ int main (int argc, char **argv){
     if (provided != MPI_THREAD_MULTIPLE)
     {
         printf("Sorry, this MPI implementation does not support multiple threads\n");
-        MPI_Abort(MPI_COMM_WORLD, 1);
+        ct->erro == -101
     }
+    MPI_Barrier(MPI_COMM_WORLD);
 
     PPMImageParams* imageParams = (PPMImageParams *)malloc(sizeof(PPMImageParams));
     PPMNode* node = (PPMNode *)malloc(sizeof(PPMNode) * size+1);
