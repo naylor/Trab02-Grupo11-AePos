@@ -124,7 +124,7 @@ int main (int argc, char **argv){
 
                                 //PROCESSO TER PERMISSAO DE LER
                                 while (lido == 0) {
-                                    #pragma omp critical (MPI)
+                                    #pragma omp critical (MPI_COMM_WORLD)
                                     {
                                         if (ler == 0) {
                                             ler = 1;
@@ -150,7 +150,7 @@ int main (int argc, char **argv){
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
                             while (gravado == 0) {
-                                #pragma omp critical (MPI)
+                                #pragma omp critical (MPI_COMM_WORLD)
                                 {
                                     if (gravar == 0) {
                                         gravar = 1;
@@ -177,7 +177,7 @@ int main (int argc, char **argv){
                         else
                             maxLinhasRand = ct->numMaxLinhas;
 
-                        #pragma omp critical (MPI)
+                        #pragma omp critical (MPI_COMM_WORLD)
                         {
                             blocks = getDivisionNodes(ct, imageParams, node, 1, i, maxLinhasRand);
                         }
