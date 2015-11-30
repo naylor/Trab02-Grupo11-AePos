@@ -24,10 +24,10 @@ int main (int argc, char **argv){
 
     //INICIANDO MPI
     MPI_Status status;
+    MPI_Request *requestList,requestNull;
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SERIALIZED, &provided);
-    printf("PRO %d %d\n", provided, MPI_THREAD_SERIALIZED );
 
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -192,8 +192,8 @@ int main (int argc, char **argv){
                         if (blocks != 0) {
                             #pragma omp critical
                             {
-                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
-                                MPI_Isend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
+                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, &requestNull);
+                                MPI_Isend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD, &requestNull);
                             }
                             primeiro = 1;
                             if (ct->debug >= 1) printf("Server[%d] enviando trabalho(carga: %d) para o node: %d\n", tServer, maxLinhasRand, i);
@@ -205,7 +205,7 @@ int main (int argc, char **argv){
                             node[i].li = -101;
                             #pragma omp critical
                             {
-                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, &requestNull);
                             }
                             fim=1;
                         }
