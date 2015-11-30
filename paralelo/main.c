@@ -252,6 +252,7 @@ int main (int argc, char **argv){
                 PPMThread* thread;
 
                 if (ct->leituraIndividual == 1) {
+                    completedIndexes[rank] = 1;
                     if (ct->debug >= 1) printf("Node solicita entrada na fila de leitura: %d\n", rank);
                     MPI_Ssend(&completedIndexes[rank], 1, MPI_INT, 0, 13, MPI_COMM_WORLD);
 
