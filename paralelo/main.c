@@ -160,7 +160,7 @@ int main (int argc, char **argv){
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
 
                                         MPI_Isend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &request[i]);
-                                        MPI_Wait(&request[i], &status[0]);
+                                        MPI_Wait(&request[i], &status);
                                         gravado = 1;
                                         MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
                                         MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
@@ -288,7 +288,7 @@ int main (int argc, char **argv){
                 //PARA GRAVAR
 
                 MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status, &request[rank]);
-                MPI_Wait(&request[rank], &status[0]);
+                MPI_Wait(&request[rank], &status);
                 if (completedIndexes[rank] == 3) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADA NO DISCO
