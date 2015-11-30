@@ -156,7 +156,7 @@ int main (int argc, char **argv){
                                 {
                                     if (gravar == 0) {
                                         gravar = 1;
-                                        completedIndexes = 3;
+                                        completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
                                         MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
