@@ -24,7 +24,7 @@ int main (int argc, char **argv){
 
     //INICIANDO MPI
     MPI_Status status;
-    MPI_Request *requestList,requestNull;
+    MPI_Request requestNull;
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SERIALIZED, &provided);
@@ -119,11 +119,11 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                int *check_receive = 0;
+                                int check_receive = 0;
                                 while (check_receive == 0) {
                                     #pragma omp critical
                                     {
-                                        MPI_Iprobe(i, &check_receive, MPI_COMM_WORLD, 10, &status);
+                                        MPI_Iprobe(i, 10, MPI_COMM_WORLD, &check_receive, &status);
                                     }
                                 }
                                 if (check_receive == 1)
