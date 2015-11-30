@@ -99,11 +99,11 @@ int main (int argc, char **argv){
             //FOI TESTADO DISPUTA EM DISCO COM FWRITE E FWRITE_UNLOCKED
             //POREM OS RESULTADOS NAO FORAM BONS, HA FALHAS DE GRAVACAO
             //POR CONCORRENCIA.
-            //#pragma omp parallel num_threads(ct->numProcessos) shared(gravar, ler, relogio)
-            //{
+            #pragma omp parallel num_threads(1) shared(gravar, ler, relogio)
+            {
                 int i;
                 //ABRE UMA THREAD PARA CADA PROCESSO
-                //#pragma omp for
+                #pragma omp for
                 for(i=1; i <= ct->numProcessos; i++) {
                     int tServer = omp_get_thread_num();
                     int primeiro = 0;
@@ -124,8 +124,8 @@ int main (int argc, char **argv){
 
                                 //PROCESSO TER PERMISSAO DE LER
                                 while (lido == 0) {
-                                    //#pragma omp critical
-                                    //{
+                                    #pragma omp critical
+                                    {
                                         if (ler == 0) {
                                             ler = 1;
                                             completedIndexes = 'R';
@@ -136,7 +136,7 @@ int main (int argc, char **argv){
                                             if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de leitura: %d\n", tServer, i);
                                             ler=0;
                                         }
-                                    //}
+                                    }
                                 }
                             }
 
@@ -150,21 +150,21 @@ int main (int argc, char **argv){
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
                             while (gravado == 0) {
-                                //#pragma omp critical
-                                //{
+                                #pragma omp critical
+                                {
                                     if (gravar == 0) {
                                         gravar = 1;
                                         completedIndexes = 'W';
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
                                         MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
-                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 6, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 7, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 8, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
-                               // }
+                                }
                             }
                         }
                         //CHAMA A FUNCAO getDivisionNodes
@@ -177,10 +177,10 @@ int main (int argc, char **argv){
                         else
                             maxLinhasRand = ct->numMaxLinhas;
 
-                        //#pragma omp critical
-                        //{
+                        #pragma omp critical
+                        {
                             blocks = getDivisionNodes(ct, imageParams, node, 1, i, maxLinhasRand);
-                        //}
+                        }
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
                             MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
@@ -198,8 +198,8 @@ int main (int argc, char **argv){
                         }
                     }
                     if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
-                //}
-                //#pragma omp barrier
+                }
+                #pragma omp barrier
             }
             printf("\n");
 
@@ -294,9 +294,9 @@ int main (int argc, char **argv){
                     relogio[rank].tempoF = total_timer(tempoF);
                     relogio[rank].tempoW = total_timer(tempoW);
 
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 6, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 7, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 8, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
