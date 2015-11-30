@@ -128,7 +128,7 @@ int main (int argc, char **argv){
                                     {
                                         if (ler == 0) {
                                             ler = 1;
-                                            completedIndexes = -202;
+                                            completedIndexes[i] = -202;
                                             if (ct->debug >= 1) printf("Server[%d] permite node ler: %d\n", tServer, i);
                                             MPI_Ssend(&completedIndexes[i], inteiro, MPI_INT, i, 05, MPI_COMM_WORLD);
                                             lido = 1;
