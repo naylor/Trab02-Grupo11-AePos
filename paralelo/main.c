@@ -197,10 +197,10 @@ int main (int argc, char **argv){
                             fim=1;
                         }
                     }
-                    if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
                 }
                 #pragma omp barrier
             }
+            if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
             printf("\n");
 
             //PARA O RELOGIO
