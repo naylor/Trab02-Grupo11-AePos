@@ -99,7 +99,7 @@ int main (int argc, char **argv){
             //FOI TESTADO DISPUTA EM DISCO COM FWRITE E FWRITE_UNLOCKED
             //POREM OS RESULTADOS NAO FORAM BONS, HA FALHAS DE GRAVACAO
             //POR CONCORRENCIA.
-            #pragma omp parallel num_threads(ct->numProcessos) shared(gravar, ler, relogio, status, MPI_COMM_WORLD, imageParams, ct)
+            #pragma omp parallel num_threads(ct->numProcessos) shared(gravar, ler, relogio, status, imageParams, ct)
             {
                 int i;
                 //ABRE UMA THREAD PARA CADA PROCESSO
