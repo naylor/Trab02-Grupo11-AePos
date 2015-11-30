@@ -159,8 +159,7 @@ int main (int argc, char **argv){
                                         completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
 
-                                        MPI_Isend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &request[i]);
-                                        MPI_Wait(&request[i], &status);
+                                        MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &status);
                                         gravado = 1;
                                         MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 06, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
@@ -205,7 +204,7 @@ int main (int argc, char **argv){
                     }
                     if (ct->debug >= 1) printf("Server[%d] foi finalizado: %d\n", tServer, rank);
                 }
-                //#pragma omp barrier
+                #pragma omp barrier
             }
             printf("\n");
 
@@ -296,8 +295,7 @@ int main (int argc, char **argv){
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
 
-                MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &request[rank]);
-                MPI_Wait(&request[rank], &status);
+                MPI_Recv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
                 if (completedIndexes[rank] == 3) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADA NO DISCO
