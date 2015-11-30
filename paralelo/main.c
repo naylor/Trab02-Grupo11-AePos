@@ -73,6 +73,7 @@ int main (int argc, char **argv){
             }
             ct->numProcessos = 0;
         }
+        exit(0);
     }
 
     //ENVIANDO AS CONFIGURACOES BASICAS PARA
