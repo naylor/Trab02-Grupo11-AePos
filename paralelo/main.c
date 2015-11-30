@@ -119,7 +119,10 @@ int main (int argc, char **argv){
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
-                                MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
+                                #pragma omp critical
+                                {
+                                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
+                                }
                                 if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando ler: %d\n", tServer, i);
                                 int lido = 0;
 
@@ -142,7 +145,10 @@ int main (int argc, char **argv){
                             }
 
                             if (ct->debug >= 1) printf("Server[%d] esperando node aplicar smooth: %d\n", tServer, i);
-                            MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                            #pragma omp critical
+                            {
+                                MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                            }
                             if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
                             int gravado = 0;
                             //QUANDO O PROCESSO FINALIZAR
@@ -184,8 +190,11 @@ int main (int argc, char **argv){
                         }
                         //ENVIA O TRABALHO PARA O PROCESSO
                         if (blocks != 0) {
-                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
-                            MPI_Ssend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
+                            #pragma omp critical
+                            {
+                                MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+                                MPI_Ssend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD);
+                            }
                             primeiro = 1;
                             if (ct->debug >= 1) printf("Server[%d] enviando trabalho(carga: %d) para o node: %d\n", tServer, maxLinhasRand, i);
                         } else {
@@ -194,7 +203,10 @@ int main (int argc, char **argv){
                             //SENAO, CONTINUA COM OUTRO BLOCO
                             if (ct->debug >= 1) printf("Server[%d] informado que o node acabou o trabalho: %d\n", tServer, i);
                             node[i].li = -101;
-                            MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+                            #pragma omp critical
+                            {
+                                MPI_Ssend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD);
+                            }
                             fim=1;
                         }
                     }
