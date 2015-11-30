@@ -183,8 +183,6 @@ PPMThread* getDivisionThreads(initialParams* ct, PPMImageParams* imageParams, PP
         if (thread[t].li != 0 && thread[t].lf == imageParams->linha-1)
             linhas += 2;
 
-        linhas++;
-
         if (strcmp(imageParams->tipo, "P6")==0)
             thread[t].ppmIn = (PPMPixel *)malloc(imageParams->coluna * linhas * sizeof(PPMPixel));
         else
