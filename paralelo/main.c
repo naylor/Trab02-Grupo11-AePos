@@ -24,7 +24,7 @@ int main (int argc, char **argv){
 
     //INICIANDO MPI
     MPI_Status status;
-    MPI_Request request;
+    MPI_Request request[20];
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
