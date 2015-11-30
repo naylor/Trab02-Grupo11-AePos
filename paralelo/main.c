@@ -115,7 +115,7 @@ int main (int argc, char **argv){
                         //ENTRA AQUI, DEPOIS DE ENVIAR TRABALHO PARA O PROCESSO
                         //AGUARDO O PROCESSO FINALIZAR E RESPONDER
                         if (primeiro == 1) {
-                            //SE A LEITURA INDIVIDUAL ESTIVER ATIVADa
+                            //SE A LEITURA INDIVIDUAL ESTIVER ATIVADA
                             //OS NODES PRECISARAO ENTRAR NA FILA PARA LER
                             if (ct->leituraIndividual == 1) {
                                 if (ct->debug >= 1) printf("Server[%d] esperando node solicitar fila de leitura: %d\n", tServer, i);
@@ -123,13 +123,13 @@ int main (int argc, char **argv){
                                 while (check_receive == 0) {
                                     #pragma omp critical
                                     {
-                                        MPI_Iprobe(i, 10, MPI_COMM_WORLD, &check_receive, &status);
+                                        MPI_Iprobe(i, 11, MPI_COMM_WORLD, &check_receive, &status);
                                     }
                                 }
                                 if (check_receive == 1)
                                     #pragma omp critical
                                     {
-                                        MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 10, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
                                     }
 
                                 if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando ler: %d\n", tServer, i);
@@ -143,7 +143,7 @@ int main (int argc, char **argv){
                                             ler = 1;
                                             completedIndexes = 'R';
                                             if (ct->debug >= 1) printf("Server[%d] permite node ler: %d\n", tServer, i);
-                                            MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
+                                            MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 12, MPI_COMM_WORLD);
                                             lido = 1;
                                             MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 13, MPI_COMM_WORLD, &status);
                                             if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de leitura: %d\n", tServer, i);
@@ -158,13 +158,13 @@ int main (int argc, char **argv){
                             while (check_receive == 0) {
                                 #pragma omp critical
                                 {
-                                    MPI_Iprobe(i, 11, MPI_COMM_WORLD, &check_receive, &status);
+                                    MPI_Iprobe(i, 31, MPI_COMM_WORLD, &check_receive, &status);
                                 }
                             }
                             if (check_receive == 1)
                                 #pragma omp critical
                                 {
-                                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 11, MPI_COMM_WORLD, &status);
+                                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, i, 31, MPI_COMM_WORLD, &status);
                                 }
 
                             if (ct->debug >= 1) printf("Server[%d] recebe mensagem do node solicitando gravar: %d\n", tServer, i);
@@ -181,11 +181,11 @@ int main (int argc, char **argv){
                                         gravar = 1;
                                         completedIndexes = 'W';
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
-                                        MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 05, MPI_COMM_WORLD);
+                                        MPI_Ssend(&completedIndexes, 1, MPI_CHAR, i, 32, MPI_COMM_WORLD);
                                         gravado = 1;
-                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 15, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 16, MPI_COMM_WORLD, &status);
-                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 17, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoR, 1, MPI_FLOAT, i, 33, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoF, 1, MPI_FLOAT, i, 34, MPI_COMM_WORLD, &status);
+                                        MPI_Recv(&relogio[i].tempoW, 1, MPI_FLOAT, i, 35, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
                                     }
@@ -210,8 +210,8 @@ int main (int argc, char **argv){
                         if (blocks != 0) {
                             #pragma omp critical
                             {
-                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, &requestNull);
-                                MPI_Isend(&node[i].lf, inteiro, MPI_INT, i, 02, MPI_COMM_WORLD, &requestNull);
+                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 21, MPI_COMM_WORLD, &requestNull);
+                                MPI_Isend(&node[i].lf, inteiro, MPI_INT, i, 22, MPI_COMM_WORLD, &requestNull);
                             }
                             primeiro = 1;
                             if (ct->debug >= 1) printf("Server[%d] enviando trabalho(carga: %d) para o node: %d\n", tServer, maxLinhasRand, i);
@@ -223,7 +223,7 @@ int main (int argc, char **argv){
                             node[i].li = -101;
                             #pragma omp critical
                             {
-                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 01, MPI_COMM_WORLD, &requestNull);
+                                MPI_Isend(&node[i].li, inteiro, MPI_INT, i, 21, MPI_COMM_WORLD, &requestNull);
                             }
                             fim=1;
                         }
@@ -267,7 +267,7 @@ int main (int argc, char **argv){
             //SE LI FOR -2, SIGNIFICA QUE NAO
             //HA MAIS TRABALHO A SER FEITO
             if (ct->debug >= 1) printf("Node aguardando trabalho: %d\n", rank);
-            MPI_Recv(&node[rank].li, inteiro, MPI_INT, 0, 01, MPI_COMM_WORLD, &status);
+            MPI_Recv(&node[rank].li, inteiro, MPI_INT, 0, 21, MPI_COMM_WORLD, &status);
 
             //ENTRA AQUI CASO NAO HA MAIS TRABALHO
             if (node[rank].li == -101) {
@@ -276,17 +276,17 @@ int main (int argc, char **argv){
             } else {
                 //SENAO, CONTINUA RECEBENDO OS DADOS
                 //PARA PROCESSAMENTO DA IMAGEM
-                MPI_Recv(&node[rank].lf, inteiro, MPI_INT, 0, 02, MPI_COMM_WORLD, &status);
+                MPI_Recv(&node[rank].lf, inteiro, MPI_INT, 0, 22, MPI_COMM_WORLD, &status);
 
                 PPMThread* thread;
 
                 if (ct->leituraIndividual == 1) {
                     if (ct->debug >= 1) printf("Node solicita entrada na fila de leitura: %d\n", rank);
-                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 11, MPI_COMM_WORLD);
 
                     //AGUARDA AUTORIZACAO DO RANK 0
                     //PARA LER
-                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 05, MPI_COMM_WORLD, &status);
+                    MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 12, MPI_COMM_WORLD, &status);
                     if (completedIndexes == 'R')
                         if (ct->debug >= 1) printf("Node tem permissao para ler: %d - %s\n", rank, hostname);
                 }
@@ -299,18 +299,18 @@ int main (int argc, char **argv){
 
                 if (ct->leituraIndividual == 1) {
                     //INFORMA O NODE QUE ACABOU
-                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 10, MPI_COMM_WORLD);
+                    MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 13, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a leitura: %d - %s\n", rank, hostname);
                 }
 
                 //INFORMA O RANK 0 QUE FINALIZOU
                 //E ESTA PRONTO PARA GRAVAR
                 if (ct->debug >= 1) printf("Node solicita entrada na fila de gravacao: %d\n", rank);
-                MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 11, MPI_COMM_WORLD);
+                MPI_Ssend(&completedIndexes, 1, MPI_CHAR, 0, 31, MPI_COMM_WORLD);
 
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
-                MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 05, MPI_COMM_WORLD, &status);
+                MPI_Recv(&completedIndexes, 1, MPI_CHAR, 0, 32, MPI_COMM_WORLD, &status);
                 if (completedIndexes == 'W') {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
                     //GRAVA IMAGEM PROCESSADA NO DISCO
@@ -325,9 +325,9 @@ int main (int argc, char **argv){
                     relogio[rank].tempoF = total_timer(tempoF);
                     relogio[rank].tempoW = total_timer(tempoW);
 
-                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 15, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 16, MPI_COMM_WORLD);
-                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 17, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoR, 1, MPI_FLOAT, 0, 33, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoF, 1, MPI_FLOAT, 0, 34, MPI_COMM_WORLD);
+                    MPI_Ssend(&relogio[rank].tempoW, 1, MPI_FLOAT, 0, 35, MPI_COMM_WORLD);
                     if (ct->debug >= 1) printf("Node informando que acabou a gravacao: %d - %s\n", rank, hostname);
                     free(thread);
                 }
