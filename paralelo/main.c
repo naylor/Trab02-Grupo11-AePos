@@ -27,14 +27,14 @@ int main (int argc, char **argv){
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
     if (provided != MPI_THREAD_MULTIPLE)
     {
         printf("Sorry, this MPI implementation does not support multiple threads\n");
         MPI_Abort(MPI_COMM_WORLD, 1);
     }
-
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     PPMImageParams* imageParams = (PPMImageParams *)malloc(sizeof(PPMImageParams));
     PPMNode* node = (PPMNode *)malloc(sizeof(PPMNode) * size+1);
