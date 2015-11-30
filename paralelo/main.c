@@ -182,6 +182,7 @@ int main (int argc, char **argv){
                                         gravar = 1;
                                     }
                                 }
+                                sleep(1);
                             }
                             if (podeGravar == 1) {
                                 #pragma omp critical
