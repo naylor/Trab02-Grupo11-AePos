@@ -287,7 +287,7 @@ int main (int argc, char **argv){
                 //AGUARDA AUTORIZACAO DO RANK 0
                 //PARA GRAVAR
 
-                MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status, &request[rank]);
+                MPI_Irecv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &request[rank]);
                 MPI_Wait(&request[rank], &status);
                 if (completedIndexes[rank] == 3) {
                     if (ct->debug >= 1) printf("Node tem permissao para gravar: %d - %s\n", rank, hostname);
