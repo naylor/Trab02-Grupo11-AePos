@@ -150,10 +150,10 @@ int main (int argc, char **argv){
                             //SE CONSEGUIR ENTRAR NA REGIAO CRITICA
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
-                            while (gravado == 0) {
+                            //while (gravado == 0) {
                                 //#pragma omp critical
                                 //{
-                                    if (gravar == 0) {
+                                    //if (gravar == 0) {
                                         gravar = 1;
                                         completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
@@ -163,10 +163,10 @@ int main (int argc, char **argv){
                                         MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 06, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
                                         gravar=0;
-                                    }
+                                    //}
                                 //}
                             }
-                        }
+                        //}
                         //CHAMA A FUNCAO getDivisionNodes
                         //ELA FORNECE PARA OS PROCESSOS A DIVISAO
                         //DE TRABALHO DE CADA UM DE ACORDO COM O NUMERO
