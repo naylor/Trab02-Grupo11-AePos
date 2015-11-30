@@ -129,7 +129,7 @@ int main (int argc, char **argv){
                                     {
                                         if (ler == 0) {
                                             ler = 1;
-                                            completedIndexes = 2;
+                                            completedIndexes[i] = 2;
                                             if (ct->debug >= 1) printf("Server[%d] permite node ler: %d\n", tServer, i);
                                             MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
                                             lido = 1;
@@ -257,7 +257,7 @@ int main (int argc, char **argv){
 
                     //AGUARDA AUTORIZACAO DO RANK 0
                     //PARA LER
-                    MPI_Recv(&completedIndexes[i], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
+                    MPI_Recv(&completedIndexes[rank], 1, MPI_INT, 0, 05, MPI_COMM_WORLD, &status);
                     if (completedIndexes[rank] == 2)
                         if (ct->debug >= 1) printf("Node tem permissao para ler: %d - %s\n", rank, hostname);
                 }
