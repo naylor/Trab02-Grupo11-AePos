@@ -99,7 +99,7 @@ int main (int argc, char **argv){
             //FOI TESTADO DISPUTA EM DISCO COM FWRITE E FWRITE_UNLOCKED
             //POREM OS RESULTADOS NAO FORAM BONS, HA FALHAS DE GRAVACAO
             //POR CONCORRENCIA.
-            #pragma omp parallel num_threads(1) shared(gravar, ler, relogio)
+            #pragma omp parallel num_threads(ct->numProcessos) shared(gravar, ler, relogio, completedIndexes, status)
             {
                 int i;
                 //ABRE UMA THREAD PARA CADA PROCESSO
@@ -124,7 +124,7 @@ int main (int argc, char **argv){
 
                                 //PROCESSO TER PERMISSAO DE LER
                                 while (lido == 0) {
-                                    #pragma omp critical
+                                    #pragma omp critical (MPI)
                                     {
                                         if (ler == 0) {
                                             ler = 1;
@@ -150,7 +150,7 @@ int main (int argc, char **argv){
                             //ALTERAR O VALOR DE "GRAVAR" PARA NENHUM
                             //PROCESSO TER PERMISSAO DE GRAVACAO
                             while (gravado == 0) {
-                                #pragma omp critical
+                                #pragma omp critical (MPI)
                                 {
                                     if (gravar == 0) {
                                         gravar = 1;
@@ -177,7 +177,7 @@ int main (int argc, char **argv){
                         else
                             maxLinhasRand = ct->numMaxLinhas;
 
-                        #pragma omp critical
+                        #pragma omp critical (MPI)
                         {
                             blocks = getDivisionNodes(ct, imageParams, node, 1, i, maxLinhasRand);
                         }
