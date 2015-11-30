@@ -24,7 +24,6 @@ int main (int argc, char **argv){
 
     //INICIANDO MPI
     MPI_Status status;
-    MPI_Request request[20];
 
     int provided, rank, size;
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
@@ -159,7 +158,7 @@ int main (int argc, char **argv){
                                         completedIndexes[i] = 3;
                                         if (ct->debug >= 1) printf("Server[%d] permite node gravar: %d\n", tServer, i);
 
-                                        MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD, &status);
+                                        MPI_Ssend(&completedIndexes[i], 1, MPI_INT, i, 05, MPI_COMM_WORLD);
                                         gravado = 1;
                                         MPI_Recv(&completedIndexes[i], 1, MPI_INT, i, 06, MPI_COMM_WORLD, &status);
                                         if (ct->debug >= 1) printf("Server[%d] tirando node da regiao de gravacao: %d\n", tServer, i);
