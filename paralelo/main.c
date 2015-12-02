@@ -124,7 +124,6 @@ int main (int argc, char **argv){
                                     #pragma omp critical
                                     {
                                         MPI_Iprobe(i, 11, MPI_COMM_WORLD, &check_receive, &status);
-                                        sleep(1);
                                     }
                                 }
                                 if (check_receive == 1)
@@ -160,7 +159,6 @@ int main (int argc, char **argv){
                                 #pragma omp critical
                                 {
                                     MPI_Iprobe(i, 31, MPI_COMM_WORLD, &check_receive, &status);
-                                    sleep(1);
                                 }
                             }
                             if (check_receive == 1)
