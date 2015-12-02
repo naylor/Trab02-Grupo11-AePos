@@ -15,7 +15,6 @@ void menu(initialParams* ct, int argc, char *argv[]){
     if (argv[1]) {
         if (strcmp(argv[1], "--help") == 0) {
             printf("\tDecomposicao de imagens com Smooth\n\n");
-            printf("\tFabio Alves Martins Pereira (NUSP 7987435)\n");
             printf("\tNaylor Garcia Bachiega (NUSP 5567669)\n\n");
 
             printf("Usar: mpiexec -n [PROCESSOS] -f [NODES] ./PPMparalelo -i [IMAGEM] -t [NUMERO THREADS(Opcional)] -c [CARGA TRABALHO(Opcional)] -a [CARGA ALEATORIA(Opcional)] -l [LEITURA INDIVIDUAL(Opcional)] -d [NIVEL DEBUG(Opcional)]\n\n");
